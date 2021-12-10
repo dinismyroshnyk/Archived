@@ -2,6 +2,10 @@
 //@cikey 67361819476f1ac99dde38b453a6db17
 //@sid 2021157297
 //@aid 7.4
+
+void desloca_direita(int meuVector[],int tamanho);
+void imprime(int meuVector[],int tamanho);
+
 int main(){
 
 	//begin_inputs
@@ -11,7 +15,18 @@ int main(){
 
 	//end_inputs
 
-
+  printf("antes : ");
+  for (i = 0; i < tamanho; i++) {
+    printf("%d",);
+  }
 
 	return 0;
+}
+
+void desloca_direita(int meuVector[],int tamanho) {
+  /* code */
+}
+
+void imprime(int meuVector[],int tamanho) {
+  /* code */
 }
