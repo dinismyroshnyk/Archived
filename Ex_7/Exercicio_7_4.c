@@ -15,10 +15,7 @@ int main(){
 
 	//end_inputs
 
-  printf("antes : ");
-  for (i = 0; i < tamanho; i++) {
-    printf("%d",);
-  }
+  imprime(meuVector,tamanho);
 
 	return 0;
 }
@@ -27,6 +24,10 @@ void desloca_direita(int meuVector[],int tamanho) {
   /* code */
 }
 
-void imprime(int meuVector[],int tamanho) {
-  /* code */
+void imprime(int meuVector[],const int tamanho) {
+  printf("antes :  ");
+  for (int i = 0; i < tamanho; i++) {
+    printf("%d  ",meuVector[i]);
+  }
+  printf("\ndepois:  ");
 }
