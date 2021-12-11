@@ -20,14 +20,26 @@ int main(){
 	return 0;
 }
 
-void desloca_direita(int meuVector[],int tamanho) {
-  /* code */
+void desloca_direita(int meuVector[],const int tamanho) {
+
+  int ultimo_elemento = meuVector[tamanho - 1], j;
+
+  for (j = tamanho - 1; j > 0; j--) {
+    meuVector[j] = meuVector[j - 1];
+  }
+
+  meuVector[0] = ultimo_elemento;
 }
 
 void imprime(int meuVector[],const int tamanho) {
-  printf("antes :  ");
-  for (int i = 0; i < tamanho; i++) {
-    printf("%d  ",meuVector[i]);
+  int i;
+  printf("antes :");
+  for (i = 0; i < tamanho; i++) {
+    printf("  %d",meuVector[i]);
   }
-  printf("\ndepois:  ");
+  printf("\ndepois:");
+  desloca_direita(meuVector,tamanho);
+  for (i= 0; i < tamanho; i++) {
+    printf("  %d",meuVector[i]);
+  }
 }
