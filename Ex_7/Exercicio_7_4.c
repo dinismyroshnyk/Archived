@@ -3,8 +3,8 @@
 //@sid 2021157297
 //@aid 7.4
 
-void desloca_direita(int meuVector[],int tamanho);
-void imprime(int meuVector[],int tamanho);
+void desloca_direita(int a[], int tam);
+void imprime(int a[], int tam);
 
 int main(){
 
@@ -20,26 +20,29 @@ int main(){
 	return 0;
 }
 
-void desloca_direita(int meuVector[],const int tamanho) {
+void desloca_direita(int a[], int tam) {
 
-  int ultimo_elemento = meuVector[tamanho - 1], j;
+  int ultimo_elemento = a[tam - 1], j;
 
-  for (j = tamanho - 1; j > 0; j--) {
-    meuVector[j] = meuVector[j - 1];
+  for (j = tam - 1; j > 0; j--) {
+    a[j] = a[j - 1];
   }
 
-  meuVector[0] = ultimo_elemento;
+  a[0] = ultimo_elemento;
 }
 
-void imprime(int meuVector[],const int tamanho) {
+void imprime(int a[],int tam) {
+
   int i;
-  printf("antes :");
-  for (i = 0; i < tamanho; i++) {
-    printf("  %d",meuVector[i]);
+
+  printf("antes : ");
+  for (i = 0; i < tam; i++) {
+    printf(" %d ",a[i]);
   }
-  printf("\ndepois:");
-  desloca_direita(meuVector,tamanho);
-  for (i= 0; i < tamanho; i++) {
-    printf("  %d",meuVector[i]);
+
+  printf("\ndepois: ");
+  desloca_direita(a,tam);
+  for (i= 0; i < tam; i++) {
+    printf(" %d ",a[i]);
   }
 }
