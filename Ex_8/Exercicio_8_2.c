@@ -7,7 +7,7 @@ int main(){
 	//begin_inputs
 
   printf("Excreva algo (maximo 20 carateres):\n");
-  char str[22];
+  char str[21];
 
   scanf("%s",str);
 

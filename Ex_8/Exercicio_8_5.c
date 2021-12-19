@@ -10,7 +10,7 @@ int main(){
 
 	//begin_inputs
 
-  char str[22];
+  char str[21];
 
   printf("Introduza um numero em binario (0 e 1 - max: 20 carateres): \n");
   scanf("%s",str);
