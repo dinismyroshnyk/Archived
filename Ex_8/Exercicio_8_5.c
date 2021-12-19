@@ -19,18 +19,22 @@ int main(){
   if (binarioParaDecimal(str) == -1) {
     printf("binario: %s - entrada invalida\n",str);
   }else{
-
+    printf("binario: %s - decimal: %d\n",str,binarioParaDecimal(str));
   }
 
 	return 0;
 }
 
 int binarioParaDecimal(char str[]){
-  for (int i = 0; str[i] != 0; i++) {
+
+  int decimal = 0, carry = 1;
+  for (int i = (strlen(str) - 1); i >= 0; i--) {
     if (str[i] != '0' && str[i] != '1') {
       return -1;
     }else{
-
+      decimal += (str[i] - 48) * carry;
+      carry *= 2;
     }
   }
+  return decimal;
 }
