@@ -53,7 +53,7 @@
         }
         .menu_lateral.active div ul ul{
             visibility: visible;
-            left: 12.65rem;
+            left: 100%;
             position: absolute;
             background: #11101d;
             width: 10rem;
@@ -73,7 +73,11 @@
             width: 25px;
         }
         .menu img{
+            text-decoration: none;
+            width: 25px;
             display: grid;
+            margin-top: 1rem;
+            padding: 0px 20px;
         }
         .inicio{
             display: grid;
