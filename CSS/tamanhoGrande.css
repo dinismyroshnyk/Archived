@@ -79,6 +79,9 @@ body{
             display: none;
             padding: 0px 20px ;
         }
+        .inicio{
+            display: none;
+        }
     /* Fim do menu lateral */
 
     /* Começo das notícias rápidas */
