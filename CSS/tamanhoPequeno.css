@@ -212,4 +212,102 @@
         display: grid;
         grid-template-columns: 19% 81%;  
     }
+    .cardCol{
+        grid-column: 2;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+    .cardColumbo{
+        padding: 0.4rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: grid;
+        align-items: center;
+        border-radius: 10px;
+        margin: 15px;
+    }
+    .table{
+        display: none;
+    }
+    #table td,#table th{
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    #table tr:nth-child(even){
+        background-color: #f2f2f2;
+    }
+    #table tr:hover {
+        background-color: #ddd;
+    }
+    #table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #81d3fc;
+        color: white;
+    }
+
+    .layoutCon{
+        display: grid;
+        grid-template-columns: 19% 81%;  
+    }
+    .cardCont{
+        grid-column: 2;
+        align-items: center;
+        justify-content: center;
+        padding: 0 ;
+    }
+    .cardContatos{
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        border-radius: 10px;
+        margin: 15px;
+    }
+    .cardContTexto{
+        width: 150px;
+    }
+    .cardContTexto h1{
+        font-size: 18px;
+    }
+
+
+    .layoutAss{
+        display: grid;
+        grid-template-columns: 19% 81%;  
+    }
+    .card{
+        display: grid;
+        font-size: 9px;
+    }
+    .cardTexto{
+        margin: 0px;
+    }
+    .cardImg a img{
+        width: 70px;
+        height: 70px;
+       padding-top: 1%;
+    }
+
+    .layoutOrg{
+        display: grid;
+        grid-template-columns: 19% 81%;  
+    }
+    .cardOrg{
+        grid-column: 2;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 14px;
+    }
+    .cardOrgSoc{
+        padding: 0.2rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        border-radius: 10px;
+        margin: 15px;
+    }
 }
