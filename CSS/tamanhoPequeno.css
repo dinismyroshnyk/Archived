@@ -5,7 +5,6 @@
     }
 
     .layout{
-        background-color: blueviolet;
         grid-template-columns: 19% 27% 27% 27%;
     }
 
