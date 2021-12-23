@@ -5,19 +5,23 @@ head{
 }
 body{
     font-family: 'Ubuntu', sans-serif;
+    max-width: 1024px;
+    margin: auto;
 }
 
 /*Começo do index*/
     /*Começo do layout da página*/
         .layout{
             display: grid;
-            grid-template-columns: 15% 28.3% 28.3% 28.3%;
+            grid-template-columns: 22% 26% 26% 26%;
         }
     /*Fim do layout da página*/
 
     /* Começo do menu lateral */
-        .logo{
-            text-align: center;
+        .logo a img{
+            align-items: center;
+            padding: 10px;
+            width: 145px;
         }
         .menu_lateral{
             position: fixed;
@@ -27,7 +31,8 @@ body{
             height: 100%;
             background: #11101d;
             display: grid;
-            grid-column: 1/2;
+            grid-template-rows: 20% 80%;
+            min-height: 720px;
         }
         .menu_lateral div ul{
             position: relative;
@@ -36,7 +41,8 @@ body{
         }
         .menu_lateral div ul li a{
             color: white;
-            display: grid;
+            display: flex;
+            gap: 10px;
             align-items: center;
             text-decoration: none;
             padding: 8px 20px;
@@ -49,7 +55,7 @@ body{
             border-bottom-right-radius: 10px;
         }
         .menu_lateral div ul ul{
-            left: 182px;
+            left: 217px;
             position: absolute;
             background: #11101d;
             width: 250px;
@@ -60,15 +66,24 @@ body{
         }
         .menu_lateral div ul .dropdown{
             position: relative;
-
         }
         .menu_lateral div ul .dropdown:hover ul{
             display: initial;
+        }
+        .dropdown a img{
+            width: 25px;
+        }
+        .menu a img{
+            text-decoration: none;
+            width: 25px;
+            display: none;
+            padding: 0px 20px ;
         }
     /* Fim do menu lateral */
 
     /* Começo das notícias rápidas */
         .Slider{
+            margin-top: 10px;
             margin-bottom: 50px;
             padding: 0;
             display: flex;
@@ -216,7 +231,7 @@ body{
        /*Começo do layout da página*/ 
         .layoutCol{
             display: grid;
-            grid-template-columns: 15% 85%;  
+            grid-template-columns: 22% 78%;  
         }
        /*Fim do layout da página*/
 
@@ -257,9 +272,9 @@ body{
 
 /*Começo dos contatos*/
     /*Começo do layout da página*/ 
-       .layoutCon{
+    .layoutCon{
         display: grid;
-        grid-template-columns: 15% 85%;  
+        grid-template-columns: 22% 78%;  
     }
    /*Fim do layout da página*/
 
@@ -286,7 +301,7 @@ body{
     /*Começo do layout da página*/ 
         .layoutAss{
             display: grid;
-            grid-template-columns: 15% 85%;  
+            grid-template-columns: 22% 78%;  
         }
    /*Fim do layout da página*/
 
@@ -301,8 +316,6 @@ body{
             padding: 2rem;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             display: flex;
-            flex-wrap: wrap;
-            align-items: center;
             border-radius: 10px;
             margin: 15px;
         }
@@ -311,6 +324,7 @@ body{
         }
         .cardImg a img{
             width: 150px;
+            padding-top: 50%;
         }
     /*Fim do layout dos cards*/
 /*Fim do assDist*/
@@ -319,7 +333,7 @@ body{
     /*Começo do layout da página*/ 
         .layoutOrg{
             display: grid;
-            grid-template-columns: 15% 85%;  
+            grid-template-columns: 22% 78%;  
         }
     /*Fim do layout da página*/
 

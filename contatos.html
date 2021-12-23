@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt">
     <head>
-        <link rel="stylesheet" href="./CSS/style.css">
         <meta name="author" content="Dinis Myroshnyk">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="./Images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="./Images/favicon.ico" type="image/x-icon">
         <title>Contatos</title>
+        <link rel="stylesheet" href="./CSS/tamanhoGrande.css">
+        <link rel="stylesheet" media="(min-width: 576px) and (max-width: 992px)" href="./CSS/tamanhoMedio.css">
+        <link rel="stylesheet" media="(min-width: 300px) and (max-width: 575px)" href="./CSS/tamanhoPequeno.css">
     </head>
 <body class="layoutCon">
     <!--Começo do menu lateral-->
     <div class="menu_lateral">
         <div class="logo">
-            <a href="./index.html"><img alt="" src="./Images/logo_blue.png" width="175"></a>
+            <a href="./index.html"><img src="./Images/logo_blue.png" alt=""></a>
         </div>
         <div>
+            <ul class="menu"><a href="#"><img src="./Images/Icons/menu.png" alt=""></a></ul>
             <ul>
-                <li class="dropdown"><a href="#">Informações</a>
+                <li class="dropdown"><a href="#"><img src="./Images/Icons/info.png" alt=""><span>Informações</span></a>
                     <ul>
                         <li> <a href="#">Perdidos e Achados</a></li>
                         <li> <a href="#">Tempo e Soltas</a></li>
@@ -29,13 +32,13 @@
                         <li> <a href="http://www.fpcolumbofilia.pt/eleicoes2021/">Eleições 2021</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#">Notícias e Eventos</a>
+                <li class="dropdown"><a href="#"><img src="./Images/Icons/noticias.png" alt=""><span>Notícias e Eventos</span></a>
                     <ul>
                         <li> <a href="#">Notícias e Eventos</a></li>
                         <li> <a href="#">Exposições e Olimpíadas</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#">Campeonatos</a>
+                <li class="dropdown"><a href="#"><img src="./Images/Icons/campeonatos.png" alt=""><span>Campeonatos</span></a>
                     <ul>
                         <li> <a href="#">Campeonatos</a></li>
                         <li> <a href="#">Regulamentos e Estatutos</a></li>
@@ -44,14 +47,14 @@
                         <li> <a href="http://www.fpcolumbofilia.pt/mira2021/">Mira 2021</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#">Contatos</a>
+                <li class="dropdown"><a href="#"><img src="./Images/Icons/contatos.png" alt=""><span>Contatos</span></a>
                     <ul>
                         <li> <a href="./contatos.html">Contatos</a></li> <!--Refazer Página-->
                         <li> <a href="./orgSoc.html">Órgãos Sociais</a></li> <!--Refazer Página-->
                         <li> <a href="./assDist.html">Associações Distritais</a></li> <!--Refazer Página-->
                     </ul>
                 </li>
-                <li class="dropdown"><a href="./serCol.html">Ser Columbófilo</a></li> <!--Refazer Página-->
+                <li class="dropdown"><a href="./serCol.html"><img src="./Images/Icons/columbofilo.png" alt=""><span>Ser Columbófilo</span></a></li> <!--Refazer Página-->
             </ul>
         </div>
     </div>
@@ -132,5 +135,7 @@
             </div>
         </div>
     </div>
+
+    <script src="./JS/menuLateralMedio.js"></script>
 </body>
 </html>
