@@ -1,4 +1,4 @@
-@media (min-width: 300px) and (max-width: 575px){
+@media (min-width: 360px) and (max-width: 575px){
 
     body{
         margin: auto;
@@ -19,7 +19,6 @@
             left: 0;
             height: 100%;
             background: #11101d;
-            min-height: 720px;
         }     
         .menu_lateral div ul{
             position: relative;
@@ -29,12 +28,11 @@
         .menu_lateral div ul li a{
             color: white;
             display: flex;
-            gap: 10px;
+            gap: 1rem;
             align-items: center;
             text-decoration: none;
-            padding: 8px 20px;
-            font-size: 1.1em;
-            height: 40px;
+            font-size: 1em;
+            height: 2.5rem;
         }
         .menu_lateral div ul li a span{
             display: none;
@@ -49,21 +47,13 @@
         }
         .menu_lateral div ul ul{
             visibility: hidden;
-            left: 217px;
-            position: absolute;
-            background: #11101d;
-            width: 250px;
-            top: 0;
-            display: none;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
         }
         .menu_lateral.active div ul ul{
             visibility: visible;
-            left: 217px;
+            left: 12.5rem;
             position: absolute;
             background: #11101d;
-            width: 250px;
+            width: 10rem;
             top: 0;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -79,12 +69,9 @@
         .dropdown a img{
             width: 25px;
         }
-        .menu a img{
-            text-decoration: none;
+        .menu img{
             width: 25px;
             display: grid;
-            padding: 0px 20px ;
-            margin-top: 25px;
         }
         .inicio{
             display: grid;

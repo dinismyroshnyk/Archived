@@ -73,11 +73,12 @@ body{
         .dropdown a img{
             width: 25px;
         }
-        .menu a img{
+        .menu img{
             text-decoration: none;
             width: 25px;
             display: none;
-            padding: 0px 20px ;
+            margin-top: 1rem;
+            padding: 0px 20px;
         }
         .inicio{
             display: none;
