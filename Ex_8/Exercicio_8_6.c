@@ -22,7 +22,7 @@ int main(){
 
 	//end_inputs
 
-  printf("\nfrase: %s",str_frase);
+  printf("frase: %s",str_frase);
   printf("\npalavra: %s",str_palavra);
   printf("\nocorrencias: %d",contaPalavras(str_frase,str_palavra));
 
@@ -34,6 +34,23 @@ int contaPalavras(char str_frase[], char str_palavra[]){
 
   int ocorrencias = 0;
 
-  
+  for (int i = 0; i < strlen(str_frase); i++) {
+
+    int temporario = i, verifica;
+
+    for (int j = 0; j < strlen(str_palavra); j++) {
+      if (str_frase[i] == str_palavra[j]) {
+        i++;
+      }
+    }
+
+    verifica = i - temporario;
+
+    if (verifica == strlen(str_palavra)) {
+      ocorrencias++;
+    }
+
+    i = temporario;
+  }
   return ocorrencias;
 }
