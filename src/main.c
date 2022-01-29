@@ -5,7 +5,6 @@
 int main(){
 
 	int opcao;
-	int opcao_sub;
 
 	do
 	{
@@ -26,7 +25,9 @@ int main(){
 		switch (opcao)
 		{
 			case 1:
-				/* code */
+
+				inserirTarefa();
+
 				break;
 
 			case 2:
@@ -35,7 +36,7 @@ int main(){
 
 			case 3:
 
-				menuTarefas(opcao_sub);
+				menuTarefas();
 
 				break;
 

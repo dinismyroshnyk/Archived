@@ -1,1 +1,3 @@
-void menuTarefas(int opcao_sub);
+void menuTarefas();
+void inserirTarefa();
+void data_limite();
