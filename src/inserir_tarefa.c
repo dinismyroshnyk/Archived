@@ -4,6 +4,8 @@
         #include <stdio.h>
         #include <stdlib.h>
 
+        #define MAX_TAREFAS 100
+
         void inserirTarefa(char descricao[], int *importancia, int *dia, int *mes, int *ano){
 
             system("cls");

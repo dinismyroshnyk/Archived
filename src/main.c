@@ -1,16 +1,19 @@
 #include "prototipos.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-//VARIÁVEIS GLOBAIS (INÍCIO)
-char descricao[52];
-int importancia;
-int dia,mes,ano;
-//VARIÁVEIS GLOBAIS (FIM)
+#define MAX_TAREFAS 100
 
 int main(){
 
 	int opcao;
+	char descricao[52];
+	int importancia;
+	int dia,mes,ano;
+	int tarefas[MAX_TAREFAS][2];
+	int data[MAX_TAREFAS][3];
+	char descricaoTarefa[MAX_TAREFAS][52];
 
 	do
 	{
@@ -31,13 +34,32 @@ int main(){
 		switch (opcao)
 		{
 			case 1:
+				
+				inserirTarefa(descricao, &importancia, &dia, &mes, &ano, tarefas[MAX_TAREFAS][2], data);
 
-				inserirTarefa(descricao, &importancia, &dia, &mes, &ano);
+				for (int i = 0; i < MAX_TAREFAS; i++)
+				{
+					tarefas[i][0] = 0;
+					tarefas[i][1] = importancia;
 
+					data[i][0] = dia;
+					data[i][1] = mes;
+					data[i][2] = ano;
+
+					strcpy(descricaoTarefa[i], descricao);
+
+					break;
+				}
+				
 				break;
 
-			case 2:
-				printf("\ndescricao: %s \nimportancia: %d \ndata: %02d/%02d/%04d", descricao, importancia, dia, mes, ano);
+			case 2: //TESTE TEMPORÁRIO DAS VARIÁVEIS
+				//printf("\ndescricao: %s \nimportancia: %d \ndata: %02d/%02d/%04d \n", descricao, importancia, dia, mes, ano);
+				for (int i = 0; i < MAX_TAREFAS; i++)
+				{
+					printf("tarefa %d: %d %d %02d/%02d/%04d %s\n", i+1, tarefas[i][0], tarefas[i][1], dia, mes, ano, descricaoTarefa);
+				}
+				
 				break;
 
 			case 3:
