@@ -14,6 +14,7 @@ int main(){
 	int tarefas[MAX_TAREFAS][2];
 	int data[MAX_TAREFAS][3];
 	char descricaoTarefa[MAX_TAREFAS][52];
+	char ficheiro[] = "tarefas";
 
 	for (int i = 0; i < MAX_TAREFAS; i++)
 	{
@@ -36,6 +37,15 @@ int main(){
 			descricaoTarefa[i][j] = NULL;
 		}
 	}
+
+	FILE * ffinal;
+
+	ffinal = fopen(ficheiro, "r");
+	for (int i = 0; i < MAX_TAREFAS; i++)
+	{
+		fscanf(ffinal, "%d %d %d %d %d %s", &tarefas[i][0], &tarefas[i][1], &data[i][0], &data[i][1], &data[i][2], descricaoTarefa[i]) != EOF;	
+	}
+	fclose(ffinal);
 
 	do
 	{

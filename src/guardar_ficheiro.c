@@ -12,7 +12,7 @@
 
         char ficheiro[] = "tarefas";
 
-        ffinal = fopen(ficheiro, "w");
+        ffinal = fopen(ficheiro, "a");
         if (ffinal == NULL)
         {
             printf("Ocorreu um erro ao criar/aceder o ficheiro");
