@@ -15,6 +15,28 @@ int main(){
 	int data[MAX_TAREFAS][3];
 	char descricaoTarefa[MAX_TAREFAS][52];
 
+	for (int i = 0; i < MAX_TAREFAS; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			tarefas[i][j] = NULL;
+		}
+	}
+	for (int i = 0; i < MAX_TAREFAS; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			data[i][j] = NULL;
+		}
+	}
+	for (int i = 0; i < MAX_TAREFAS; i++)
+	{
+		for (int j = 0; j < 52; j++)
+		{
+			descricaoTarefa[i][j] = NULL;
+		}
+	}
+
 	do
 	{
 		system("cls");
@@ -39,25 +61,31 @@ int main(){
 
 				for (int i = 0; i < MAX_TAREFAS; i++)
 				{
-					tarefas[i][0] = 0;
-					tarefas[i][1] = importancia;
+					if (descricaoTarefa[i][0] == NULL)
+					{
+						tarefas[i][0] = 0;
+						tarefas[i][1] = importancia;
 
-					data[i][0] = dia;
-					data[i][1] = mes;
-					data[i][2] = ano;
+						data[i][0] = dia;
+						data[i][1] = mes;
+						data[i][2] = ano;
 
-					strcpy(descricaoTarefa[i], descricao);
+						strcpy(descricaoTarefa[i], descricao);
 
-					break;
+						break;
+					}
+							
 				}
 				
 				break;
 
 			case 2: //TESTE TEMPORÁRIO DAS VARIÁVEIS
-				//printf("\ndescricao: %s \nimportancia: %d \ndata: %02d/%02d/%04d \n", descricao, importancia, dia, mes, ano);
 				for (int i = 0; i < MAX_TAREFAS; i++)
 				{
-					printf("tarefa %d: %d %d %02d/%02d/%04d %s\n", i+1, tarefas[i][0], tarefas[i][1], dia, mes, ano, descricaoTarefa);
+					if (descricaoTarefa[i][0] != NULL)
+					{
+						printf("tarefa %d:\t%d \t%d \t%02d/%02d/%04d \t%s\n", i+1, tarefas[i][0], tarefas[i][1], data[i][0], data[i][1], data[i][2], descricaoTarefa[i]);
+					}
 				}
 				
 				break;
