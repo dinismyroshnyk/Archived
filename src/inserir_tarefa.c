@@ -4,11 +4,8 @@
         #include <stdio.h>
         #include <stdlib.h>
 
-        void inserirTarefa(){
+        void inserirTarefa(char descricao[], int *importancia, int *dia, int *mes, int *ano){
 
-            char descricao[52];
-            int importancia;
-            
             system("cls");
             fflush(stdin);
 
@@ -26,7 +23,6 @@
                     fflush(stdin);
                     getchar();
                     system("cls");
-
                 } 
                 else
                 {
@@ -37,9 +33,9 @@
 
                         printf("Escolha a importancia da sua tarefa:\n\n1 - Alta\n2 - Media\n3 - Baixa\n\n");
                         printf("Importancia: ");
-                        scanf("%d", &importancia);
+                        scanf("%d", &*importancia);
 
-                        if (importancia < 1 || importancia > 3)
+                        if (*importancia < 1 || *importancia > 3)
                         {
                             system("cls");
                             printf("Importancia invalida ...\n");
@@ -51,8 +47,7 @@
                     }      
 
                     system("cls");
-                    data_limite();
-
+                    data_limite(&*dia, &*mes, &*ano);
                     break;
                              
                 }

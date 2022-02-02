@@ -7,37 +7,32 @@
         int numDiasMes(int mes, int ano);
         int bissexto(int ano);
 
-        void data_limite(){
+        void data_limite(int *dia, int *mes, int *ano){
 
-            while (1)
+            printf("Introduza a data limite para a tarefa (dd-mm-aaaa):\n\n");
+            scanf("%d%d%d",&*dia,&*mes,&*ano);
+
+            bissexto(*ano);
+            numDiasMes(*mes,bissexto(*ano));
+            dataValida(*dia,*mes,*ano);
+
+            if (dataValida(*dia,*mes,*ano) == 1)
             {
-                int dia,mes,ano;
-
-                printf("Introduza a data limite para a tarefa (dd-mm-aaaa):\n\n");
-                scanf("%d%d%d",&dia,&mes,&ano);
-
-                bissexto(ano);
-                numDiasMes(mes,bissexto(ano));
-                dataValida(dia,mes,ano);
-
-                if (dataValida(dia,mes,ano) == 1)
-                {
-                    printf("\nTarefa adicionada com sucesso ...");
-                    fflush(stdin);
-                    getchar();
-                    fflush(stdin);
-                    break;
-                }
-                else
-                {
-                    system("cls");
-                    printf("Data invalida ...\n");
-                    fflush(stdin);
-                    getchar();
-                    fflush(stdin);
-                    system("cls");
-                }
+                printf("\nTarefa adicionada com sucesso ...");
+                fflush(stdin);
+                getchar();
+                fflush(stdin);
             }
+            else
+            {
+                system("cls");
+                printf("Data invalida ...\n");
+                fflush(stdin);
+                getchar();
+                fflush(stdin);
+                system("cls");
+            }
+            
                         
 
         }

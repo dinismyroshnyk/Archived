@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//VARIÁVEIS GLOBAIS (INÍCIO)
+char descricao[52];
+int importancia;
+int dia,mes,ano;
+//VARIÁVEIS GLOBAIS (FIM)
+
 int main(){
 
 	int opcao;
@@ -26,12 +32,12 @@ int main(){
 		{
 			case 1:
 
-				inserirTarefa();
+				inserirTarefa(descricao, &importancia, &dia, &mes, &ano);
 
 				break;
 
 			case 2:
-				/* code */
+				printf("\ndescricao: %s \nimportancia: %d \ndata: %02d/%02d/%04d", descricao, importancia, dia, mes, ano);
 				break;
 
 			case 3:
