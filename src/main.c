@@ -97,7 +97,9 @@ int main(){
 				break;
 
 			case 4:
-				/* code */
+				
+				guardarFicheiro(tarefas, data, descricaoTarefa);
+
 				break;
 
 			case 0:
