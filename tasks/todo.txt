@@ -11,9 +11,9 @@ Semáforo:
 
 2 LED's (semáforo peões)
 
-    [] Deve ser pressionado um botão para ativar;
+    [x] Deve ser pressionado um botão para ativar;
 
-    [] Ativa apenas quando o vermelho dos carros ficar durante 2 segundos, e ficará verde durante 10 segundos;
+    [x] Ativa apenas quando o vermelho dos carros ficar durante 2 segundos, e ficará verde durante 10 segundos;
 
     [] 10 segundos num display de 9 até 0
 
