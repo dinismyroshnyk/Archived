@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-void intermitente(); //FEITO
+void intermitente();
 void maquinaEstados();
 
 void setup() //FEITO
@@ -10,15 +10,9 @@ void setup() //FEITO
 	pinMode(A0, INPUT);
 	for (int i = 3; i < 14; i++) pinMode(i, OUTPUT);
 
-	//semáforo para carros (verde por default)
-	digitalWrite(13, HIGH);
-
-	//semáforo para peões (vermelho por default)
-	digitalWrite(9, HIGH);
-
-	//alarme intermitente (apagado por default)
-	digitalWrite(8, LOW);
-
+	digitalWrite(13, HIGH); //semáforo para carros (verde por default)	
+	digitalWrite(9, HIGH); //semáforo para peões (vermelho por default)
+	digitalWrite(8, LOW); //alarme intermitente (apagado por default)
 	Serial.begin(9600);
 }
 
@@ -33,7 +27,7 @@ void intermitente() //FEITO
     static unsigned long tempo = millis();
     int fotoresistor = analogRead(A0);
 
-    Serial.println(fotoresistor);
+    Serial.println(fotoresistor); //teste do fotoresistor
     
     if (fotoresistor <= 75)
     {               
@@ -46,10 +40,9 @@ void intermitente() //FEITO
     else digitalWrite(8, LOW);
 }
 
-void maquinaEstados()
+void maquinaEstados() //FEITO
 {
     static unsigned long tempo = millis();
-    static unsigned long buzzer; //tempo que o buzzer fica ligado
 
     enum class estadoSemaforo {
         PARADO,
@@ -93,7 +86,7 @@ void maquinaEstados()
             if (millis() - tempoContador >= 1000 && i >= 0)
             {
                 tempoContador = millis();
-                Serial.println(i); //teste contador
+                Serial.println(i); //teste do contador
 
                 i & 8 ? digitalWrite(7, HIGH) : digitalWrite(7, LOW);
                 i & 4 ? digitalWrite(6, HIGH) : digitalWrite(6, LOW);
