@@ -1,6 +1,6 @@
 Semáforo:
 
-[]Colocar tudo pra funcionar em simultâneo !!
+[x]Colocar tudo pra funcionar em simultâneo !!
 
 
 3 LED's (semáforo carro)

@@ -1,32 +1,14 @@
 #include <Arduino.h>
 
-void intermitenteLed3 ();
+void intermitente(); //FEITO
+void maquinaEstados();
 
-unsigned long tempo = 0;
-unsigned long tempoAnteriorLed3 = 0;
-unsigned long intervaloLed3 = 500;
-int estadoLed3 = 0;
-
-/*
- Name:		tac-trabalho-pratico-1.ino
- Created:	4/29/2022 11:55:22 AM
- Author:	dinis
-*/
-
-int estadoBotao = 0;
-int contador = 9;
-int buzzer = 3;
-
-// the setup function runs once when you press reset or power the board
-void setup() {
-	
+void setup() //FEITO
+{
 	//inicialização dos pinos
 	pinMode(2, INPUT);
 	pinMode(A0, INPUT);
-	for (int i = 3; i < 14; i++)
-	{
-		pinMode(i, OUTPUT);
-	}
+	for (int i = 3; i < 14; i++) pinMode(i, OUTPUT);
 
 	//semáforo para carros (verde por default)
 	digitalWrite(13, HIGH);
@@ -40,96 +22,114 @@ void setup() {
 	Serial.begin(9600);
 }
 
-// the loop function runs over and over again until power down or reset
-void loop() {
-
-	tempo = millis();
-    intermitenteLed3();
-		
-	estadoBotao = digitalRead(2);
-	
-	if (estadoBotao == HIGH)
-	{
-		//teste botão
-		Serial.println("botao on");
-
-		//semáforo para carros (de verde para vermelho)
-		delay(2000);
-		digitalWrite(13, LOW);
-		digitalWrite(12, HIGH);
-		delay(2000);
-		digitalWrite(12, LOW);
-		digitalWrite(11, HIGH);
-		delay(2000);
-
-		//semáforo para peões (de vermelho para verde)
-		digitalWrite(9, LOW);
-		digitalWrite(10, HIGH);
-		
-		//delay de 10 segundos com o contador
-		for (int i = contador; i >= 0; i--)
-		{
-			Serial.println(i); //teste contador
-
-			i & 8 ? digitalWrite(7, HIGH) : digitalWrite(7, LOW);
-			i & 4 ? digitalWrite(6, HIGH) : digitalWrite(6, LOW);
-			i & 2 ? digitalWrite(5, HIGH) : digitalWrite(5, LOW);
-			i & 1 ? digitalWrite(4, HIGH) : digitalWrite(4, LOW);
-			delay(1000);
-		}
-
-		//buzzer !!DEBUG!!
-		for (int i = 50; i < 401; i++)
-		{
-			tone(3, i);
-			delay(8);
-		}
-		
-		delay(1000);
-
-		for (int i = 400; i > 49; i--)
-		{
-			tone(3, i);
-			delay(2);
-		}
-		noTone(3);
-
-		//luz vermelha intermitente no semáforo para peões (6 segundos)
-		digitalWrite(10, LOW);
-		for (int i = 0; i < 6; i++)
-		{
-			digitalWrite(9, HIGH);
-			delay(500);
-			digitalWrite(9, LOW);
-			delay(500);
-		}
-		digitalWrite(9, HIGH); //luz vermelha no semáforo para peões
-		
-		//semáforo para carros (de vermelho para verde)
-		digitalWrite(11, LOW);
-		digitalWrite(13, HIGH);
-
-	}
+void loop() //FEITO
+{   
+    intermitente();
+    maquinaEstados();
 }
 
-void intermitenteLed3()
+void intermitente() //FEITO
 {
+    static unsigned long tempo = millis();
     int fotoresistor = analogRead(A0);
 
-	Serial.println(fotoresistor);
+    Serial.println(fotoresistor);
+    
+    if (fotoresistor <= 75)
+    {               
+        if (millis() - tempo >= 500)
+        {
+            digitalWrite(8, !digitalRead(8));
+            tempo = millis();
+        }  
+    }
+    else digitalWrite(8, LOW);
+}
 
-    if (tempo % 100 == 0)
+void maquinaEstados()
+{
+    static unsigned long tempo = millis();
+    static unsigned long buzzer; //tempo que o buzzer fica ligado
+
+    enum class estadoSemaforo {
+        PARADO,
+        CARROS,
+        PEOES,
+        ALARME
+    };
+
+    static estadoSemaforo estadoAtual = estadoSemaforo::PARADO;
+
+    switch (estadoAtual)
     {
-        if (fotoresistor <= 45)
-        {               
-            if (tempo - tempoAnteriorLed3 > intervaloLed3)
-            {
-                tempoAnteriorLed3 = tempo;
-                if (estadoLed3 == 0) estadoLed3 = 1;
-                else estadoLed3 = 0;
-                digitalWrite(8, estadoLed3);    
-            }  
+    case estadoSemaforo::PARADO:    
+        if (digitalRead(2) == HIGH)
+        {
+            tempo = millis();
+            estadoAtual = estadoSemaforo::CARROS;
+        }    
+        break;
+    case estadoSemaforo::CARROS:
+        if (millis() - tempo >= 2000 && digitalRead(13) == HIGH)
+        {
+            digitalWrite(13, LOW);
+            digitalWrite(12, HIGH);
         }
-        else digitalWrite(8, LOW);
+        if (millis() - tempo >= 4000 && digitalRead(12) == HIGH)
+        {
+            digitalWrite(12, LOW);
+            digitalWrite(11, HIGH);
+            estadoAtual = estadoSemaforo::PEOES;
+        }        
+    break;
+    case estadoSemaforo::PEOES:
+        static unsigned long tempoContador = 0;
+        static int i = 9;
+        if (millis() - tempo >= 6000 && digitalRead(11) == HIGH)
+        {
+            digitalWrite(10, HIGH);
+            digitalWrite(9, LOW);
+
+            if (millis() - tempoContador >= 1000 && i >= 0)
+            {
+                tempoContador = millis();
+                Serial.println(i); //teste contador
+
+                i & 8 ? digitalWrite(7, HIGH) : digitalWrite(7, LOW);
+                i & 4 ? digitalWrite(6, HIGH) : digitalWrite(6, LOW);
+                i & 2 ? digitalWrite(5, HIGH) : digitalWrite(5, LOW);
+                i & 1 ? digitalWrite(4, HIGH) : digitalWrite(4, LOW);
+                i--;
+            }
+            if (i < 0) estadoAtual = estadoSemaforo::ALARME;
+        }      
+    break;
+    case estadoSemaforo::ALARME:
+        static unsigned long tempoAlarme = 1000;
+        digitalWrite(10, LOW);
+        if (millis() - tempo >= 16000 && millis() - tempo <= 22000)
+        {
+            if (millis() - tempoAlarme >= 500)
+            {
+                tempoAlarme = millis();
+                digitalWrite(9, !digitalRead(9));
+                for (int i = 50; i < 401; i++)
+                {
+                    tone(3, i);
+                }
+            }
+        } 
+        if (millis() - tempo > 22000)
+        {
+            digitalWrite(9, HIGH);
+            noTone(3);
+            digitalWrite(11, LOW);
+            digitalWrite(13, HIGH);
+            i = 9;
+            estadoAtual = estadoSemaforo::PARADO;
+        }          
+    break;
+    default: Serial.println("Erro");
+        break;
     }
 }
