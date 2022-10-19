@@ -1,0 +1,4 @@
+SELECT nome, ndep, sal
+FROM emp
+WHERE sal BETWEEN 150000 AND 300000
+;
