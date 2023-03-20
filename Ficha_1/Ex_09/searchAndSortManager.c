@@ -19,7 +19,7 @@ void printInedxOfLargestElement(int* array, int size)
     insertAnyKey();
 }
 
-void swap(int* array, int size, int index1, int index2)
+void swap(int* array, int index1, int index2)
 {
     int temp = array[index1];
     array[index1] = array[index2];
@@ -48,7 +48,7 @@ void swapElements(int* array, int size)
 {
     int index1 = getUserIndex(size, 1);
     int index2 = getUserIndex(size, 2);
-    swap(array, size, index1, index2);
+    swap(array, index1, index2);
     clearScreen();
     printf("Os elementos foram trocados com sucesso!\n");
     insertAnyKey();
@@ -65,7 +65,7 @@ void selectionSort(int* array, int size)
                 lowest_value = j;
         }
         if (lowest_value != i)
-            swap(array, size, i, lowest_value);
+            swap(array, i, lowest_value);
     }
     clearScreen();
     printf("O array foi ordenado com sucesso!\n");
