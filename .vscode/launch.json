@@ -12,6 +12,6 @@
             "environment": [],
             "console": "externalTerminal",
             "preLaunchTask": "C_Build"
-        }
+        },
     ]
 }
