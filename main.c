@@ -1,3 +1,5 @@
+#include "utility.h"
+
 int main()
 {
     main_menu();
