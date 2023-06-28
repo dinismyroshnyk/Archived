@@ -1,6 +1,6 @@
 #pragma once
 
-// --- --- main menu functions --- ---
+// main menu functions declarations
 void main_menu();
 void main_menu_text();
 void register_new_client();

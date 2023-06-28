@@ -17,8 +17,7 @@ void (*main_menu_options[])() = {
     save_as_csv_menu
 };
 
-void main_menu_text()
-{
+void main_menu_text() {
     clear_screen();
     printf("[1] - Register new client\n");
     printf("[2] - Remove client (deactivate card)\n");
@@ -30,11 +29,9 @@ void main_menu_text()
     printf("\n>>> ");
 }
 
-void main_menu()
-{
+void main_menu() {
     int option;
-    do
-    {
+    do {
         main_menu_text();
         option = validate_integer();
         clear_buffer();
@@ -44,43 +41,37 @@ void main_menu()
     } while (option != 0);
 }
 
-void register_new_client()
-{
+void register_new_client() {
     clear_screen();
     printf("--- Register new client ---\n");
     insert_any_key();
 }
 
-void remove_client()
-{
+void remove_client() {
     clear_screen();
     printf("--- Remove client (deactivate card) ---\n");
     insert_any_key();
 }
 
-void list_active_clients()
-{
+void list_active_clients() {
     clear_screen();
     printf("--- List active clients ---\n");
     insert_any_key();
 }
 
-void client_management_menu()
-{
+void client_management_menu() {
     clear_screen();
     printf("--- Client management ---\n");
     insert_any_key();
 }
 
-void sort_by_total_spent()
-{
+void sort_by_total_spent() {
     clear_screen();
     printf("--- Sort by total spent ---\n");
     insert_any_key();
 }
 
-void save_as_csv_menu()
-{
+void save_as_csv_menu() {
     clear_screen();
     printf("--- Save as csv ---\n");
     insert_any_key();

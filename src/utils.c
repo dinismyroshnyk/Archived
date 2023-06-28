@@ -8,34 +8,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-void clear_buffer()
-{
+void clear_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-void insert_any_key()
-{
+void insert_any_key() {
     printf("Press any key to continue...");
     getchar();
 }
 
-void invalid_option()
-{
+void invalid_option() {
     clear_screen();
     printf("Invalid option!\n");
     insert_any_key();
 }
 
-void program_exit()
-{
+void program_exit() {
     clear_screen();
     printf("Exiting...\n");
     exit(0);
 }
 
-int validate_integer()
-{
+int validate_integer() {
     int option;
     char input[50];
     scanf("%s", input);
@@ -45,8 +40,7 @@ int validate_integer()
     return option;
 }
 
-float validate_float()
-{
+float validate_float() {
     float option;
     char input[50];
     scanf("%s", input);
