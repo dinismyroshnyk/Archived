@@ -2,17 +2,24 @@
 #ifdef _WIN32 // assume Windows
     #include "..\includes\main_menu.h"
     #include "..\includes\utils.h"
+    #include "..\includes\structs.h"
+    #include "..\includes\binary.h"
 #else // assume POSIX or similar
     #include "../includes/main_menu.h"
     #include "../includes/utils.h"
+    #include "../includes/structs.h"
+    #include "../includes/binary.h"
 #endif
 #include <stdio.h>
+#include <string.h>
 
 void (*main_menu_options[])() = {
     register_new_client, 
     remove_client, 
     list_active_clients, 
-    client_management_menu, 
+    client_management_menu,
+    register_new_store,
+    remove_store,
     sort_by_total_spent, 
     save_as_csv_menu
 };
@@ -23,27 +30,90 @@ void main_menu_text() {
     printf("[2] - Remove client (deactivate card)\n");
     printf("[3] - List active clients\n");
     printf("[4] - Client management\n");
-    printf("[5] - Sort by total spent\n");
-    printf("[6] - Save as csv\n");
+    printf("[5] - Register new store\n");
+    printf("[6] - Remove store\n");
+    printf("[7] - Sort by total spent\n");
+    printf("[8] - Save as csv\n");
     printf("[0] - Exit\n");
     printf("\n>>> ");
 }
 
-void main_menu() {
+void main_menu(Store** stores_pointer, Store* stores, Client** clients_pointer, Client* clients) {
     int option;
     do {
+        stores = read_store_from_binary();
+        clients = read_client_from_binary();
         main_menu_text();
         option = validate_integer();
         clear_buffer();
-        if(option >= 1 && option <= 6) (*main_menu_options[option-1])();
+        if(option == 1) (*main_menu_options[option-1])(clients_pointer);
+        else if (option == 5) (*main_menu_options[option-1])(stores_pointer);
+        else if (option >= 2 && option <= 8 && option != 5) (*main_menu_options[option-1])(stores, clients);
         else if (option == 0) program_exit();
         else invalid_option();
     } while (option != 0);
 }
 
-void register_new_client() {
+void register_new_client(Client** clients_pointer) {
     clear_screen();
     printf("--- Register new client ---\n");
+    int counter = read_client_counter_from_binary();
+    char answer;
+    Client* new_client = malloc(sizeof(Client));
+    if (new_client == NULL) {
+        fprintf(stderr, "Error: function insert_new_client() failed to allocate more memory.\n");
+        exit(1);
+    }
+    printf("Client name: ");
+    fgets(new_client->name, 50, stdin);
+    printf("Client phone: ");
+    new_client->phone = validate_integer();
+    clear_buffer();
+    printf("Client email: ");
+    fgets(new_client->email, 50, stdin);
+    printf("Client NIF: ");
+    new_client->nif = validate_integer();
+    clear_buffer();
+    while (1) {
+        printf("The client has a card? (y/n) ");
+        scanf("%c", &answer);
+        if (answer == 'y' || answer == 'Y') 
+        {
+            new_client->has_card = 1;
+            new_client->client_number = ++counter;
+            new_client->card = malloc(sizeof(Card));
+            if (new_client->card == NULL) {
+                fprintf(stderr, "Error: function insert_new_client() failed to allocate more memory for card struct.\n");
+                exit(1);
+            }
+            memset(new_client->card, 0, sizeof(Card));
+            new_client->vouchers = NULL;
+            clear_buffer();
+            break;
+        }
+        if (answer == 'n' || answer == 'N') 
+        {
+            new_client->has_card = 0;
+            new_client->client_number = ++counter;
+            new_client->card = NULL;
+            new_client->vouchers = NULL;
+            clear_buffer();
+            break;
+        }
+        else printf("Invalid answer. Please try again.\n");
+    };
+    new_client->next = NULL;
+    if (*clients_pointer == NULL) {
+        *clients_pointer = new_client;
+    } else {
+        Client* current = *clients_pointer;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_client;
+    }
+    write_client_to_binary(*clients_pointer);
+    write_client_counter_to_binary(counter);
     insert_any_key();
 }
 
@@ -62,6 +132,58 @@ void list_active_clients() {
 void client_management_menu() {
     clear_screen();
     printf("--- Client management ---\n");
+    insert_any_key();
+}
+
+void register_new_store(Store** stores_pointer) {
+    clear_screen();
+    printf("--- Register new store ---\n");
+    Store* new_store = malloc(sizeof(Store));
+    if (new_store == NULL) {
+        fprintf(stderr, "Error: function insert_new_store() failed to allocate more memory.\n");
+        exit(1);
+    }
+    printf("Store name: ");
+    fgets(new_store->name, 50, stdin);
+    printf("Store address: ");
+    fgets(new_store->address, 50, stdin);
+    new_store->purchases = NULL; // overwrites the old stores for some reason
+    new_store->next = NULL;
+    if (*stores_pointer == NULL) {
+        *stores_pointer = new_store;
+    } else {
+        Store* current = *stores_pointer;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_store;
+    }
+    write_store_to_binary(*stores_pointer);
+    insert_any_key();
+}
+
+void remove_store(Store* stores, Client* clients) { // temporarily to test the binary file
+    clear_screen();
+    printf("--- Remove store ---\n");
+    for (Store* current = stores; current != NULL; current = current->next) {
+        printf("Store name: %s", current->name);
+        printf("Store address: %s", current->address);
+        printf("\n");
+    }
+    for (Client* current = clients; current != NULL; current = current->next) {
+        printf("Client name: %s", current->name);
+        printf("Client phone: %d\n", current->phone);
+        printf("Client email: %s", current->email);
+        printf("Client NIF: %d\n", current->nif);
+        printf("Client number: %d\n", current->client_number);
+        printf("Client has card: %d\n", current->has_card);
+        if (current->has_card == 1) {
+            printf("Client total spent: %f\n", current->card->total_spent);
+            printf("Client spent vouchers: %d\n", current->card->spent_vouchers);
+            printf("Clients purchase counter: %d\n", current->card->purchase_counter);
+        }
+        printf("\n");
+    }
     insert_any_key();
 }
 

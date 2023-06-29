@@ -27,7 +27,7 @@ void invalid_option() {
 void program_exit() {
     clear_screen();
     printf("Exiting...\n");
-    exit(0);
+    return;
 }
 
 int validate_integer() {

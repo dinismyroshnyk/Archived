@@ -13,5 +13,7 @@ void insert_any_key();
 void invalid_option();
 void clear_buffer();
 int validate_integer();
+int validate_phone_number();
+int validate_nif();
 float validate_float();
 void program_exit();

@@ -7,10 +7,18 @@ typedef struct Client {
     char email[50];
     int nif;
     int client_number;
-    struct Purchase* anonymous_purchases;
-    struct Voucher* anonymous_vouchers;
+    int has_card;
+    struct Card* card;
+    struct Purchase* purchases;
+    struct Voucher* vouchers;
     struct Client* next;
 } Client;
+
+typedef struct Card {
+    float total_spent;
+    int spent_vouchers;
+    int purchase_counter;
+} Card;
 
 typedef struct Purchase {
     float value;
@@ -19,16 +27,16 @@ typedef struct Purchase {
     int year;
     struct Store* store;
     struct Purchase* next;
-} Purchases;
+} Purchase;
 
 typedef struct Store {
     char name[50];
     char address[50];
-    struct Purchase* anonymous_purchases;
+    struct Purchase* purchases;
     struct Store* next;
 } Store;
 
 typedef struct Voucher {
-    float value;
+    int counter;
     struct Voucher* next;
-} Vouchers;
+} Voucher;
