@@ -89,7 +89,16 @@ void register_new_client(Client* clients) {
                 exit(1);
             }
             memset(new_client->card, 0, sizeof(Card));
-            new_client->vouchers = NULL;
+            //new_client->vouchers = NULL;
+            // teste de vouchers
+            new_client->vouchers = malloc(sizeof(Voucher));
+            if (new_client->vouchers == NULL) {
+                fprintf(stderr, "Error: function insert_new_client() failed to allocate more memory for voucher struct.\n");
+                exit(1);
+            }
+            new_client->vouchers->value = 5;
+            new_client->vouchers->next = NULL;
+            // fim teste de vouchers
             clear_buffer();
             break;
         }

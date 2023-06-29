@@ -110,6 +110,8 @@ void add_purchase(Client* clients, Store* stores) {
     Client* selected_client = NULL;
     for (Client* current_client = clients; current_client != NULL; current_client = current_client->next) {
         if (current_client->client_number == client_number) {
+            current_client->card->total_spent += value;
+            current_client->card->purchase_counter += 1;
             selected_client = current_client;
             break;
         }
@@ -118,6 +120,29 @@ void add_purchase(Client* clients, Store* stores) {
         printf("Client not found!\n");
         insert_any_key();
         return;
+    }
+    if (selected_client->has_card) {
+        Voucher* current_voucher = selected_client->vouchers;
+        if (current_voucher != NULL) {
+            printf("You have a voucher with a value of %.2f. Do you want to use it to discount this purchase? (y/n)\n", current_voucher->value);
+            char answer;
+            scanf("%c", &answer);
+            clear_buffer();
+            if (answer == 'y') {
+                if (value < current_voucher->value) {
+                    printf("The purchase value is lower than the voucher discount. The voucher cannot be used.\n");
+                } else {
+                    value -= current_voucher->value;
+                    new_purchase->value = value;
+                    selected_client->card->total_spent -= current_voucher->value;
+                    selected_client->card->spent_vouchers += 1;
+                    Voucher* temp = current_voucher;
+                    selected_client->vouchers = current_voucher->next;
+                    free(temp);
+                    printf("Voucher used successfully!\n");
+                }
+            }
+        }
     }
     Purchase* current_purchase = selected_client->purchases;
     if (current_purchase == NULL) {
@@ -168,10 +193,28 @@ void list_purchases(Client* clients) {
     insert_any_key();
 }
 
-void purchase_details() {
+void purchase_details(Client* clients) {
     clear_screen();
     printf("--- Purchase details ---\n");
-    insert_any_key();
+    int client_number;
+    while (1)
+    {
+        printf("Enter client number: ");
+        client_number = validate_integer();
+        clear_buffer();
+        if (client_number >= 1 && client_number <= read_client_counter_from_binary()) break;
+        else invalid_option();
+        clear_screen();
+    }
+    for (Client* current = clients; current != NULL; current = current->next) {
+        if (current->client_number == client_number) {
+            printf("Total spent: %.2f\n", current->card->total_spent);
+            printf("Spent vouchers: %d\n", current->card->spent_vouchers);
+            printf("Average spent: %.2f\n", current->card->total_spent / current->card->purchase_counter);
+            insert_any_key();
+            return;
+        }
+    }
 }
 
 void verify_vouchers() {

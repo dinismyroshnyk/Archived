@@ -37,6 +37,6 @@ typedef struct Store {
 } Store;
 
 typedef struct Voucher {
-    int counter;
+    float value;
     struct Voucher* next;
 } Voucher;
