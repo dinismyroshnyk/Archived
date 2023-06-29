@@ -8,8 +8,8 @@
 
 // client management menu functions declarations
 void client_management_menu_text();
-void client_management_menu(Client* clients);
-void add_purchase();
-void list_purchases();
+void client_management_menu(Client* clients, Store* stores);
+void add_purchase(Client* clients, Store* stores);
+void list_purchases(Client* clients);
 void purchase_details();
 void verify_vouchers();

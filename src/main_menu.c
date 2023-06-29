@@ -50,8 +50,8 @@ void main_menu(Store** stores_pointer, Store* stores, Client** clients_pointer, 
         clear_buffer();
         if(option == 1) (*main_menu_options[option-1])(clients_pointer);
         else if (option == 5) (*main_menu_options[option-1])(stores_pointer);
-        else if ((option >= 2 && option <= 4) || (option >= 7 && option <= 8)) (*main_menu_options[option-1])(clients);
-        else if (option == 6) (*main_menu_options[option-1])(stores, clients);
+        else if ((option >= 2 && option <= 3) || (option >= 7 && option <= 8)) (*main_menu_options[option-1])(clients);
+        else if (option == 6 || option == 4) (*main_menu_options[option-1])(clients, stores);
         else if (option == 0) program_exit();
         else invalid_option();
     } while (option != 0);
@@ -196,7 +196,7 @@ void register_new_store(Store** stores_pointer) {
     insert_any_key();
 }
 
-void remove_store(Store* stores, Client* clients) { // temporarily to test the binary file
+void remove_store(Client* clients, Store* stores) { // temporarily to test the binary file
     clear_screen();
     printf("--- Remove store ---\n");
     for (Store* current = stores; current != NULL; current = current->next) {
