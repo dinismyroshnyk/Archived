@@ -10,7 +10,7 @@
 void edit_client_menu_text();
 void edit_client_menu(Client* client);
 void edit_name(Client* client, int client_number);
-void edit_phone();
-void edit_email();
-void edit_nif();
-void reactivate_card();
+void edit_phone(Client* client, int client_number);
+void edit_email(Client* client, int client_number);
+void edit_nif(Client* client, int client_number);
+void reactivate_card(Client* client, int client_number);
