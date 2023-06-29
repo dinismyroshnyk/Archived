@@ -115,12 +115,11 @@ void add_purchase(Client* clients, Store* stores) {
                         return;
                     }
                 }
-            } else {
-                printf("Store not found!\n");
-                insert_any_key();
-                return;
             }
         }
+        printf("Store not found!\n");
+        insert_any_key();
+        return;
     }
     insert_any_key();
 }
