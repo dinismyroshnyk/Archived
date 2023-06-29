@@ -178,8 +178,10 @@ void register_new_store(Store* stores) {
     }
     printf("Store name: ");
     fgets(new_store->name, 50, stdin);
+    new_store->name[strlen(new_store->name)-1] = '\0';
     printf("Store address: ");
     fgets(new_store->address, 50, stdin);
+    new_store->address[strlen(new_store->address)-1] = '\0';
     new_store->purchases = NULL; // overwrites the old stores for some reason
     new_store->next = NULL;
     if (stores == NULL) {
