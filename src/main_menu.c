@@ -40,7 +40,7 @@ void main_menu_text() {
     printf("\n>>> ");
 }
 
-void main_menu(Store** stores_pointer, Store* stores, Client** clients_pointer, Client* clients) {
+void main_menu(Store* stores, Client* clients) {
     int option;
     do {
         stores = read_store_from_binary();
@@ -48,16 +48,15 @@ void main_menu(Store** stores_pointer, Store* stores, Client** clients_pointer, 
         main_menu_text();
         option = validate_integer();
         clear_buffer();
-        if(option == 1) (*main_menu_options[option-1])(clients_pointer);
-        else if (option == 5) (*main_menu_options[option-1])(stores_pointer);
-        else if ((option >= 2 && option <= 3) || (option >= 7 && option <= 8)) (*main_menu_options[option-1])(clients);
-        else if (option == 6 || option == 4) (*main_menu_options[option-1])(clients, stores);
+        if((option >= 1 && option <= 3) || (option >= 6 && option <= 8)) (*main_menu_options[option-1])(clients);
+        else if (option == 5) (*main_menu_options[option-1])(stores);
+        else if (option == 4) (*main_menu_options[option-1])(clients, stores);
         else if (option == 0) program_exit();
         else invalid_option();
     } while (option != 0);
 }
 
-void register_new_client(Client** clients_pointer) {
+void register_new_client(Client* clients) {
     clear_screen();
     printf("--- Register new client ---\n");
     int counter = read_client_counter_from_binary();
@@ -106,16 +105,16 @@ void register_new_client(Client** clients_pointer) {
         else printf("Invalid answer. Please try again.\n");
     };
     new_client->next = NULL;
-    if (*clients_pointer == NULL) {
-        *clients_pointer = new_client;
+    if (clients == NULL) {
+        clients = new_client;
     } else {
-        Client* current = *clients_pointer;
+        Client* current = clients;
         while (current->next != NULL) {
             current = current->next;
         }
         current->next = new_client;
     }
-    write_client_to_binary(*clients_pointer);
+    write_client_to_binary(clients);
     write_client_counter_to_binary(counter);
     insert_any_key();
 }
@@ -169,7 +168,7 @@ void list_active_clients(Client* clients) {
     insert_any_key();
 }
 
-void register_new_store(Store** stores_pointer) {
+void register_new_store(Store* stores) {
     clear_screen();
     printf("--- Register new store ---\n");
     Store* new_store = malloc(sizeof(Store));
@@ -183,41 +182,22 @@ void register_new_store(Store** stores_pointer) {
     fgets(new_store->address, 50, stdin);
     new_store->purchases = NULL; // overwrites the old stores for some reason
     new_store->next = NULL;
-    if (*stores_pointer == NULL) {
-        *stores_pointer = new_store;
+    if (stores == NULL) {
+        stores = new_store;
     } else {
-        Store* current = *stores_pointer;
+        Store* current = stores;
         while (current->next != NULL) {
             current = current->next;
         }
         current->next = new_store;
     }
-    write_store_to_binary(*stores_pointer);
+    write_store_to_binary(stores);
     insert_any_key();
 }
 
-void remove_store(Client* clients, Store* stores) { // temporarily to test the binary file
+void remove_store() { // temporarily to test the binary file
     clear_screen();
     printf("--- Remove store ---\n");
-    for (Store* current = stores; current != NULL; current = current->next) {
-        printf("Store name: %s", current->name);
-        printf("Store address: %s", current->address);
-        printf("\n");
-    }
-    for (Client* current = clients; current != NULL; current = current->next) {
-        printf("Client name: %s", current->name);
-        printf("Client phone: %d\n", current->phone);
-        printf("Client email: %s", current->email);
-        printf("Client NIF: %d\n", current->nif);
-        printf("Client number: %d\n", current->client_number);
-        printf("Client has card: %d\n", current->has_card);
-        if (current->has_card == 1) {
-            printf("Client total spent: %f\n", current->card->total_spent);
-            printf("Client spent vouchers: %d\n", current->card->spent_vouchers);
-            printf("Clients purchase counter: %d\n", current->card->purchase_counter);
-        }
-        printf("\n");
-    }
     insert_any_key();
 }
 

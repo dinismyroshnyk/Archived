@@ -13,6 +13,6 @@
 int main() {
     Client* clients = NULL;
     Store* stores = NULL;
-    main_menu(&stores, stores, &clients, clients);
+    main_menu(stores, clients);
     return 0;
 }
