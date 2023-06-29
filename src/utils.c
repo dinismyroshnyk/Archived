@@ -1,8 +1,10 @@
 // --- system specific include path ---
 #ifdef _WIN32 // assume Windows
     #include "..\includes\utils.h"
+    #include "..\includes\structs.h"
 #else // assume POSIX or similar
     #include "../includes/utils.h"
+    #include "../includes/structs.h"
 #endif
 #include <stdio.h>
 #include <stdlib.h>

@@ -10,16 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-void dealocate_list(Store** stores) { // temp
-    Store* current = *stores;
-    while (current != NULL) {
-        Store* next = current->next;
-        free(current);
-        current = next;
-    }
-    *stores = NULL;
-}
-
 void write_store_to_binary(Store* stores) {
     FILE *file = fopen("stores.bin", "wb");
     if (file == NULL) {

@@ -4,11 +4,13 @@
     #include "..\includes\utils.h"
     #include "..\includes\structs.h"
     #include "..\includes\binary.h"
+    #include "..\includes\client_management_menu.h"
 #else // assume POSIX or similar
     #include "../includes/main_menu.h"
     #include "../includes/utils.h"
     #include "../includes/structs.h"
     #include "../includes/binary.h"
+    #include "../includes/client_management_menu.h"
 #endif
 #include <stdio.h>
 #include <string.h>
@@ -48,7 +50,8 @@ void main_menu(Store** stores_pointer, Store* stores, Client** clients_pointer, 
         clear_buffer();
         if(option == 1) (*main_menu_options[option-1])(clients_pointer);
         else if (option == 5) (*main_menu_options[option-1])(stores_pointer);
-        else if (option >= 2 && option <= 8 && option != 5) (*main_menu_options[option-1])(stores, clients);
+        else if ((option >= 2 && option <= 4) || (option >= 7 && option <= 8)) (*main_menu_options[option-1])(clients);
+        else if (option == 6) (*main_menu_options[option-1])(stores, clients);
         else if (option == 0) program_exit();
         else invalid_option();
     } while (option != 0);
@@ -117,21 +120,52 @@ void register_new_client(Client** clients_pointer) {
     insert_any_key();
 }
 
-void remove_client() {
+void remove_client(Client* clients) {
     clear_screen();
     printf("--- Remove client (deactivate card) ---\n");
+    printf("Insert client number: ");
+    int client_number = validate_integer();
+    clear_buffer();
+    if (clients == NULL) printf("There are no registered clients.\n");
+    else {
+        for (Client* current = clients; current != NULL; current = current->next) {
+            if (current->client_number == client_number) {
+                if (current->has_card == 0) {
+                    printf("Client does not have a card.\n");
+                    break;
+                }
+                else {
+                    current->has_card = 0;
+                    if (current->card != NULL) {
+                        free(current->card);
+                        current->card = NULL;
+                    }
+                    write_client_to_binary(clients);
+                    printf("Client card deactivated.\n");
+                    break;
+                }
+            }
+        }
+    }
     insert_any_key();
 }
 
-void list_active_clients() {
+void list_active_clients(Client* clients) {
     clear_screen();
     printf("--- List active clients ---\n");
-    insert_any_key();
-}
-
-void client_management_menu() {
-    clear_screen();
-    printf("--- Client management ---\n");
+    if (clients == NULL) printf("There are no active clients.\n");
+    else {
+        for (Client* current = clients; current != NULL; current = current->next) {
+            if (current->has_card == 1) {
+                printf("Client name: %s", current->name);
+                printf("Client phone: %d\n", current->phone);
+                printf("Client email: %s", current->email);
+                printf("Client NIF: %d\n", current->nif);
+                printf("Client number: %d\n", current->client_number);
+                printf("\n");
+            }
+        }
+    }
     insert_any_key();
 }
 

@@ -2,6 +2,9 @@
 .vscode
 build
 
+# Binary files
+*.bin
+
 # Prerequisites
 *.d
 
