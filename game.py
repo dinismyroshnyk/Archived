@@ -10,7 +10,7 @@ class Game():
         self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
         self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
         self.font_name = 'assets/fonts/8-BIT WONDER.TTF'
-        self.BLACK, self.WHITE = (0, 0, 0), (255, 255, 255)
+        self.BLACK, self.WHITE, self.GRAY = (0, 0, 0), (255, 255, 255), (128, 128, 128)
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
         self.credits = CreditsMenu(self)
@@ -22,7 +22,7 @@ class Game():
             if self.SELECT_KEY:
                 self.playing = False
             self.display.fill(self.BLACK)
-            self.draw_text('Thanks for Playing', 20, self.DISPLAY_W/2, self.DISPLAY_H/2)
+            self.draw_text('Thanks for Playing', 20, (self.DISPLAY_W/2, self.DISPLAY_H/2), self.WHITE)
             self.window.blit(self.display, (0,0))
             pygame.display.update()
             self.reset_keys()
@@ -49,9 +49,9 @@ class Game():
     def reset_keys(self):
         self.UP_KEY, self.DOWN_KEY, self.SELECT_KEY = False, False, False
 
-    def draw_text(self, text, size, x, y):
+    def draw_text(self, text, size, xy, color):
         font = pygame.font.Font(self.font_name, size)
-        text_surface = font.render(text, True, self.WHITE)
+        text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
-        text_rect.center = (x, y)
+        text_rect.center = (xy)
         self.display.blit(text_surface, text_rect)
