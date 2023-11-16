@@ -3,16 +3,17 @@ import pygame
 class Menu():
     def __init__(self, game):
         self.game = game
-        self.mid_w, self.mid_h = self.game.DISPLAY_W/2, self.game.DISPLAY_H/2
+        self.mid_w, self.mid_h = self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2
         self.run_display = True
         self.cursor_rect = pygame.Rect(0, 0, 20, 20)
         self.offset = - 100
 
     def draw_cursor(self):
         self.game.draw_text('x', 15, (self.cursor_rect.x, self.cursor_rect.y), self.game.WHITE)
+        self.game.draw_text('x', 15, (self.cursor_rect.x - (2 * self.offset) + 20, self.cursor_rect.y), self.game.WHITE)
 
     def blit_screen(self):
-        self.game.window.blit(self.game.display, (0,0))
+        self.game.window.blit(self.game.display, (0, 0))
         pygame.display.update()
         self.game.reset_keys()
 
@@ -43,7 +44,7 @@ class MainMenu(Menu):
         }
 
     def draw_menu(self):
-        self.game.draw_text('Main Menu', 20, (self.game.DISPLAY_W/2, self.game.DISPLAY_H/2 - 20), self.game.WHITE)
+        self.game.draw_text('Main Menu', 20, (self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 20), self.game.WHITE)
         self.game.draw_text("Start Game", 15, (self.start_x, self.start_y), self.game.WHITE if self.state == 'Start' else self.game.GRAY)
         self.game.draw_text("Options", 15, (self.options_x, self.options_y), self.game.WHITE if self.state == 'Options' else self.game.GRAY)
         self.game.draw_text("Credits", 15, (self.credits_x, self.credits_y), self.game.WHITE if self.state == 'Credits' else self.game.GRAY)
@@ -91,7 +92,7 @@ class OptionsMenu(Menu):
         }
 
     def draw_menu(self):
-        self.game.draw_text('Options', 20, (self.game.DISPLAY_W/2, self.game.DISPLAY_H/2 - 20), self.game.WHITE)
+        self.game.draw_text('Options', 20, (self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 20), self.game.WHITE)
         self.game.draw_text("Volume", 15, (self.vol_x, self.vol_y), self.game.WHITE if self.state == 'Volume' else self.game.GRAY)
         self.game.draw_text("Controls", 15, (self.controls_x, self.controls_y), self.game.WHITE if self.state == 'Controls' else self.game.GRAY)
         self.game.draw_text("Back", 15, (self.back_x, self.back_y), self.game.WHITE if self.state == 'Back' else self.game.GRAY)
@@ -129,8 +130,8 @@ class CreditsMenu(Menu):
         self.cursor_rect.midtop = (self.back_x + self.offset, self.back_y)
 
     def draw_menu(self):
-        self.game.draw_text('Credits', 20, (self.game.DISPLAY_W/2, self.game.DISPLAY_H/2 - 20), self.game.WHITE)
-        self.game.draw_text('Made by me', 15, (self.game.DISPLAY_W/2, self.game.DISPLAY_H/2 + 10), self.game.GRAY)
+        self.game.draw_text('Credits', 20, (self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 - 20), self.game.WHITE)
+        self.game.draw_text('Made by me', 15, (self.game.DISPLAY_W / 2, self.game.DISPLAY_H / 2 + 10), self.game.GRAY)
         self.game.draw_text("Back", 15, (self.back_x, self.back_y), self.game.WHITE)
 
     def check_input(self):

@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 from menu import *
 
 class Game():
@@ -22,8 +23,8 @@ class Game():
             if self.SELECT_KEY:
                 self.playing = False
             self.display.fill(self.BLACK)
-            self.draw_text('Thanks for Playing', 20, (self.DISPLAY_W/2, self.DISPLAY_H/2), self.WHITE)
-            self.window.blit(self.display, (0,0))
+            self.draw_text('Thanks for Playing', 20, (self.DISPLAY_W / 2, self.DISPLAY_H / 2), self.WHITE)
+            self.window.blit(self.display, (0, 0))
             pygame.display.update()
             self.reset_keys()
 
