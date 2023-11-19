@@ -5,16 +5,19 @@ from menu import *
 class Game():
     def __init__(self):
         pygame.init()
+        info = pygame.display.Info()
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.SELECT_KEY = False, False, False
-        self.DISPLAY_W, self.DISPLAY_H = 1280, 720
+        self.DISPLAY_W, self.DISPLAY_H = info.current_w, info.current_h
+        self.d_1920x1080, self.d_1280x720, self.d_1024x768, self.d_800x600 = (1920, 1080), (1280, 720), (1024, 768), (800, 600)
         self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
-        self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
+        self.window = pygame.display.set_mode((self.DISPLAY_W,self.DISPLAY_H), pygame.FULLSCREEN)
         self.font_name = 'assets/fonts/8-BIT WONDER.TTF'
         self.BLACK, self.WHITE, self.GRAY = (0, 0, 0), (255, 255, 255), (128, 128, 128)
         self.main_menu = MainMenu(self)
         self.options = OptionsMenu(self)
         self.credits = CreditsMenu(self)
+        self.resolution = ResolutionMenu(self)
         self.curr_menu = self.main_menu
 
     def game_loop(self):
