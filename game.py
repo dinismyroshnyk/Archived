@@ -1,61 +1,88 @@
-import pygame
-from pygame.locals import *
-from menu import *
+import pygame, os, time
+from states.title_screen import TitleScreen
 
 class Game():
     def __init__(self):
         pygame.init()
         info = pygame.display.Info()
-        self.running, self.playing = True, False
-        self.UP_KEY, self.DOWN_KEY, self.SELECT_KEY = False, False, False
-        self.DISPLAY_W, self.DISPLAY_H = info.current_w, info.current_h
-        self.d_1920x1080, self.d_1280x720, self.d_1024x768, self.d_800x600 = (1920, 1080), (1280, 720), (1024, 768), (800, 600)
-        self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
-        self.window = pygame.display.set_mode((self.DISPLAY_W,self.DISPLAY_H), pygame.FULLSCREEN)
-        self.font_name = 'assets/fonts/8-BIT WONDER.TTF'
-        self.BLACK, self.WHITE, self.GRAY = (0, 0, 0), (255, 255, 255), (128, 128, 128)
-        self.main_menu = MainMenu(self)
-        self.options = OptionsMenu(self)
-        self.credits = CreditsMenu(self)
-        self.resolution = ResolutionMenu(self)
-        self.curr_menu = self.main_menu
+        self.GAME_LOGIC_SIZE, self.SCREEN_SIZE = (1280, 720), (info.current_w, info.current_h)
+        self.NATIVE_SCREEN_SIZE = self.SCREEN_SIZE
+        self.game_canvas = pygame.Surface(self.GAME_LOGIC_SIZE)
+        self.screen = pygame.display.set_mode(self.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED)
+        self.running, self.playing = True, True
+        self.keys = {'UP': False, 'DOWN': False, 'LEFT': False, 'RIGHT': False, 'SELECT': False, 'ARROW_UP': False, 'ARROW_DOWN': False}
+        self.colors = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'GRAY': (128, 128, 128)}
+        self.dt, self.prev_time = 0, 0
+        self.state_stack = []
+        self.load_assets()
+        self.load_state()
 
     def game_loop(self):
         while self.playing:
-            self.check_events()
-            if self.SELECT_KEY:
-                self.playing = False
-            self.display.fill(self.BLACK)
-            self.draw_text('Thanks for Playing', 20, (self.DISPLAY_W / 2, self.DISPLAY_H / 2), self.WHITE)
-            self.window.blit(self.display, (0, 0))
-            pygame.display.update()
-            self.reset_keys()
+            self.get_dt()
+            self.get_events()
+            self.update()
+            self.render()
 
-    def check_events(self):
+    def get_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.handle_quit_event()
             if event.type == pygame.KEYDOWN:
-                self.handle_keydown_event(event)
+                self.handle_key_event(event, True)
+            if event.type == pygame.KEYUP:
+                self.handle_key_event(event, False)
 
     def handle_quit_event(self):
         self.running, self.playing = False, False
-        self.curr_menu.run_display = False
 
-    def handle_keydown_event(self, event):
-        if event.key == pygame.K_RETURN:
-            self.SELECT_KEY = True
-        if event.key == pygame.K_UP:
-            self.UP_KEY = True
-        if event.key == pygame.K_DOWN:
-            self.DOWN_KEY = True
+    def handle_key_event(self, event, is_key_down):
+        key_map = {
+            pygame.K_w: 'UP',
+            pygame.K_s: 'DOWN',
+            pygame.K_a: 'LEFT',
+            pygame.K_d: 'RIGHT',
+            pygame.K_RETURN: 'SELECT',
+            pygame.K_UP: 'ARROW_UP',
+            pygame.K_DOWN: 'ARROW_DOWN'
+        }
+        if event.key in key_map:
+            self.keys[key_map[event.key]] = is_key_down
+
+    def update(self):
+        self.state_stack[-1].update(self.dt, self.keys)
+
+    def render(self):
+        self.state_stack[-1].render(self.game_canvas)
+        self.screen.blit(pygame.transform.scale(self.game_canvas, self.SCREEN_SIZE), (0, 0))
+        pygame.display.flip()
+
+    def get_dt(self):
+        curr_time = time.time()
+        self.dt = curr_time - self.prev_time
+        self.prev_time = curr_time
+
+    def draw_text(self, surface, text, color, xy):
+        text_surface = self.font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.center = xy
+        surface.blit(text_surface, text_rect)
+
+    def load_assets(self):
+        self.assets_dir = os.path.join('assets')
+        self.sprites_dir = os.path.join(self.assets_dir, 'sprites')
+        self.font_dir = os.path.join(self.assets_dir, 'fonts')
+        self.font = pygame.font.Font(os.path.join(self.font_dir, '8-BIT WONDER.TTF'), 15)
+
+    def load_state(self):
+        self.title_screen = TitleScreen(self)
+        self.state_stack.append(self.title_screen)
 
     def reset_keys(self):
-        self.UP_KEY, self.DOWN_KEY, self.SELECT_KEY = False, False, False
+        for key in self.keys:
+            self.keys[key] = False
 
-    def draw_text(self, text, size, xy, color):
-        font = pygame.font.Font(self.font_name, size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        text_rect.center = (xy)
-        self.display.blit(text_surface, text_rect)
+if __name__ == '__main__':
+    game = Game()
+    while game.running:
+        game.game_loop()
