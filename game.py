@@ -1,6 +1,7 @@
 import pygame, os, time
 from states.title_screen import TitleScreen
 from shaders.crt_shader import Shader
+from server.client import Client
 
 class Game():
     def __init__(self):
@@ -84,8 +85,18 @@ class Game():
     def reset_keys(self):
         for key in self.keys:
             self.keys[key] = False
+    
+
+def read_pos(str):
+    str = str.split(',')
+    return int(str[0]), int(str[1])
+
+def make_pos(tup):
+    return str(tup[0]) + ',' + str(tup[1])
 
 if __name__ == '__main__':
     game = Game()
+    c = Client()
+    startPos = read_pos(c.getPos())
     while game.running:
         game.game_loop()
