@@ -1,1 +1,0 @@
-| pygame.DOUBLEBUF | pygame.OPENGL
