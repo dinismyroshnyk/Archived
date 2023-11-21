@@ -2,6 +2,7 @@ from states.state import State
 from states.game_world import GameWorld
 from states.credits_screen import CreditsScreen
 from states.options_screen import OptionsScreen
+from states.multiplayer_screen import MultiplayerScreen
 
 class TitleScreen(State):
     def __init__(self, game):
@@ -21,7 +22,8 @@ class TitleScreen(State):
             new_state = GameWorld(self.game)
             new_state.enter_state()
         if option == 'Multiplayer':
-            print('Multiplayer')
+            new_state = MultiplayerScreen(self.game)
+            new_state.enter_state()
         if option == 'Options':
             new_state = OptionsScreen(self.game)
             new_state.enter_state()
