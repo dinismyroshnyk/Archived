@@ -1,5 +1,6 @@
 import pygame, os, time
 from states.title_screen import TitleScreen
+from shaders.crt_shader import Shader
 
 class Game():
     def __init__(self):
@@ -7,8 +8,9 @@ class Game():
         info = pygame.display.Info()
         self.GAME_LOGIC_SIZE, self.SCREEN_SIZE = (1280, 720), (info.current_w, info.current_h)
         self.NATIVE_SCREEN_SIZE = self.SCREEN_SIZE
-        self.game_canvas = pygame.Surface(self.GAME_LOGIC_SIZE)
-        self.screen = pygame.display.set_mode(self.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED)
+        self.game_canvas = pygame.Surface(self.GAME_LOGIC_SIZE).convert((255, 65280, 16711680, 0))
+        self.screen = pygame.display.set_mode(self.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED | pygame.DOUBLEBUF | pygame.OPENGL)
+        self.shader = Shader(self)
         self.running, self.playing = True, True
         self.keys = {'UP': False, 'DOWN': False, 'LEFT': False, 'RIGHT': False, 'SELECT': False, 'ARROW_UP': False, 'ARROW_DOWN': False}
         self.colors = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'GRAY': (128, 128, 128)}
@@ -23,6 +25,7 @@ class Game():
             self.get_events()
             self.update()
             self.render()
+            self.shader.render()
 
     def get_events(self):
         for event in pygame.event.get():
