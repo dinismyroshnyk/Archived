@@ -1,33 +1,32 @@
 import socket
+import pickle
 
 class Client:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.server = '192.168.3.61'
+        self.server = '192.168.1.79'
         self.port = 5555
         self.addr = (self.server, self.port)
         self.pos = self.connect()
 
-    def get_pos(self):
-        return self.pos
+    def get_p(self):
+        return self.p
 
 
     def connect(self):
         try:
             self.client.connect(self.addr)
-            return self.client.recv(2048).decode()
+            return pickle.loads(self.client.recv(2048))
         except:
             pass
 
     def send(self, data):
         try:
-            self.client.send(str.encode(data))
-            return self.client.recv(2048).decode()
+            self.client.send(pickle.dumps(data))
+            return pickle.loads(self.client.recv(2048))
         except socket.error as e:
             print(e)
 
-    #def disconnect(self):
-       # pass
 
 
 # Not sure if anything here works at all

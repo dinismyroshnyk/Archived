@@ -1,6 +1,7 @@
 import pygame, os, time
 from states.title_screen import TitleScreen
 from shaders.crt_shader import Shader
+from server.client import Client
 
 class Game():
     def __init__(self):
@@ -88,5 +89,7 @@ class Game():
 
 if __name__ == '__main__':
     game = Game()
+    c = Client()
+    p = c.get_p()
     while game.running:
         game.game_loop()

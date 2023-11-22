@@ -4,7 +4,7 @@ class Player():
     def __init__(self, game):
         self.game = game
         self.load_sprites()
-        self.pos = (self.game.GAME_LOGIC_SIZE[0] / 2, self.game.GAME_LOGIC_SIZE[1] / 2)
+        self.pos = (self.game.GAME_LOGIC_SIZE[0] / 2, self.game.GAME_LOGIC_SIZE[1] / 2) # posiçao do jogador 
         self.curr_frame, self.last_frame_update = 0, 0
 
     def update(self, dt, keys):
