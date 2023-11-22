@@ -1,6 +1,5 @@
 import socket
 from _thread import *
-import sys
 import pickle
 from player import Player
 
@@ -17,15 +16,15 @@ except socket.error as e:
 s.listen(4)
 print("Waiting for a connection, Server Started")
 
-pos = [(0, 0), (100, 100)]
+players = [Player(), Player()]
 
 def threaded_client(conn, Player):
-    conn.send(pickle.dumps(pos[Player]))
+    conn.send(pickle.dumps(players[Player]))
     reply = ""
     while True:
         try:
             data = pickle.loads(conn.recv(2048))
-            pos[Player] = data
+            players[Player] = data
             
 
             if not data:
@@ -33,9 +32,9 @@ def threaded_client(conn, Player):
                 break
             else:
                 if Player == 1:
-                    reply = pos[0]
+                    reply = players[0]
                 else:
-                    reply = pos[1]
+                    reply = players[1]
                 print("Received: ", data)
                 print("Sending: ", reply)
 

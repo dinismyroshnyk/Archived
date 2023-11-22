@@ -92,4 +92,6 @@ if __name__ == '__main__':
     c = Client()
     p = c.get_p()
     while game.running:
+        p2 = c.send(p)
         game.game_loop()
+        p.move()
