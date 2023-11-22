@@ -30,7 +30,7 @@ class ResolutionOptions(State):
 
     def handle_fullscreen_option(self):
         self.game.SCREEN_SIZE = self.game.NATIVE_SCREEN_SIZE
-        self.game.screen = pygame.display.set_mode(self.game.SCREEN_SIZE, pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.OPENGL)
+        self.game.screen = pygame.display.set_mode(self.game.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.OPENGL)
 
     def handle_resolution_option(self, width, height):
         self.game.SCREEN_SIZE = (width, height)
