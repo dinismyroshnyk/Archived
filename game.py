@@ -12,7 +12,7 @@ class Game():
         self.screen = pygame.display.set_mode(self.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.OPENGL)
         self.shader = Shader(self)
         self.running, self.playing = True, True
-        self.keys = {'UP': False, 'DOWN': False, 'LEFT': False, 'RIGHT': False, 'SELECT': False, 'ARROW_UP': False, 'ARROW_DOWN': False}
+        self.keys = {'UP': False, 'DOWN': False, 'LEFT': False, 'RIGHT': False, 'SELECT': False, 'ARROW_UP': False, 'ARROW_DOWN': False, 'PAUSE': False}
         self.colors = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'GRAY': (128, 128, 128)}
         self.dt, self.prev_time = 0, 0
         self.state_stack = []
@@ -46,7 +46,8 @@ class Game():
             pygame.K_d: 'RIGHT',
             pygame.K_RETURN: 'SELECT',
             pygame.K_UP: 'ARROW_UP',
-            pygame.K_DOWN: 'ARROW_DOWN'
+            pygame.K_DOWN: 'ARROW_DOWN',
+            pygame.K_ESCAPE: 'PAUSE'
         }
         if event.key in key_map:
             self.keys[key_map[event.key]] = is_key_down

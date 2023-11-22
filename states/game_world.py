@@ -1,6 +1,7 @@
 import pygame, os
 from states.state import State
 from player import Player
+from states.pause_screen import PauseScreen
 
 class GameWorld(State):
     def __init__(self, game):
@@ -10,6 +11,9 @@ class GameWorld(State):
 
     def update(self, dt, keys):
         self.player.update(dt, keys)
+        if keys['PAUSE']:
+            new_state = PauseScreen(self.game)
+            new_state.enter_state()
 
     def render(self, surface):
         surface.blit(self.grass_img, (0, 0))
