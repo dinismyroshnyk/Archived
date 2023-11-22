@@ -36,6 +36,7 @@ class Shader:
         self.program['ScreenResolution'] = game.GAME_LOGIC_SIZE
 
     def render(self):
+        self.ctx.viewport = (0, 0, *self.game.SCREEN_SIZE)
         self.texture_data = self.game.game_canvas.get_view('1')
         self.screen_texture.write(self.texture_data)
         self.ctx.clear(14/255,40/255,66/255)
