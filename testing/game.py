@@ -1,6 +1,7 @@
 import pygame, os, time
 from states.title_screen import TitleScreen
 from shaders.crt_shader import Shader
+from server.client import Client
 
 class Game():
     def __init__(self):
