@@ -19,8 +19,10 @@ class PauseScreen(State):
         if option == 'Main Menu':
             self.exit_state()
             self.exit_state()
+            self.game.player.client.disconnect()
         if option == 'Quit':
             self.game.running, self.game.playing = False, False
+            self.game.player.client.disconnect()
 
     def render(self, surface):
         surface.fill(self.game.colors['BLACK'])
