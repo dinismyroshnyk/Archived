@@ -5,7 +5,7 @@ class Client:
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client.connect((host, port))
         self.connected = True
-        self.characters = []
+        self.chars = []
 
     def send_data(self, data):
         if self.connected:
@@ -36,7 +36,7 @@ class Client:
                 break
 
     def handle_character_assignments(self, characters):
-        self.characters = characters
+        self.chars = characters
 
     def disconnect(self):
         if self.connected:

@@ -8,17 +8,17 @@ class Server:
         self.clients = []
         self.client_identifiers = {} # For debugging purposes
         self.lock = threading.Lock()
-        self.characters = [{'assigned_to': None, 'controlled': False, 'position': (0, 0)} for _ in range(4)]
+        self.chars = [{'assigned_to': None, 'controlled': False, 'position': (0, 0)} for _ in range(4)]
         self.running = True
-        for i, character in enumerate(self.characters):
-            character['position'] = (0, i * 60)  # Assign a default position to each character
+        for i, char in enumerate(self.chars):
+            char['position'] = (0, i * 60)  # Assign a default position to each character
         print(f'Server started on {host}:{port}')
 
     def send_chars_data(self):
         for connected_client in self.clients.copy():  # Use copy to avoid modifying the list while iterating
-            characters_without_sockets = [{'controlled': character['controlled'], 'position': character['position'], 'assigned_to': self.client_identifiers.get(connected_client) if character['assigned_to'] == connected_client else None} for character in self.characters]
+            chars_without_sockets = [{'controlled': char['controlled'], 'position': char['position'], 'assigned_to': self.client_identifiers.get(connected_client) if char['assigned_to'] == connected_client else None} for char in self.chars]
             try:
-                data = pickle.dumps(('characters', characters_without_sockets))
+                data = pickle.dumps(('characters', chars_without_sockets))
             except Exception as e:
                 print(f'Error pickling data: {e}')
                 continue
@@ -30,13 +30,13 @@ class Server:
     def debug(self): # Debug method
         print('-' * 20)
         print('Characters: ')
-        for character in self.characters: 
-            client = character['assigned_to']
+        for char in self.chars: 
+            client = char['assigned_to']
             if client is not None:
                 client_id = self.client_identifiers.get(client, 'Unknown client')
-                print(f'assigned_to: {client_id}, controlled: {character["controlled"]}')
+                print(f'assigned_to: {client_id}, controlled: {char["controlled"]}')
             else:
-                print(character)
+                print(char)
         print('-' * 20)
 
     def assign_client_id(self, client): # Debug method
@@ -45,72 +45,72 @@ class Server:
 
     def switch_character(self, client, direction):
         with self.lock:
-            client_characters = [character for character in self.characters if character['assigned_to'] == client]
-            current_character = next((character for character in client_characters if character['controlled']), None)
-            if current_character is None:
+            client_chars = [char for char in self.chars if char['assigned_to'] == client]
+            curr_char = next((char for char in client_chars if char['controlled']), None)
+            if curr_char is None:
                 return
-            current_index = client_characters.index(current_character)
-            new_index = (current_index + direction) % len(client_characters)
-            new_character = client_characters[new_index]
-            current_character['controlled'] = False
-            new_character['controlled'] = True
+            curr_index = client_chars.index(curr_char)
+            new_index = (curr_index + direction) % len(client_chars)
+            new_char = client_chars[new_index]
+            curr_char['controlled'] = False
+            new_char['controlled'] = True
             self.send_chars_data()
             self.debug()  # Debug line
 
     def assign_characters(self):
         with self.lock:
             num_clients = len(self.clients)
-            previous_assignments = self.characters.copy()
-            self.characters = [{'assigned_to': None, 'controlled': False, 'position': character['position']} for character in self.characters]
+            prev_assignments = self.chars.copy()
+            self.chars = [{'assigned_to': None, 'controlled': False, 'position': char['position']} for char in self.chars]
             if num_clients == 1:
-                for i, character in enumerate(self.characters):
-                    if previous_assignments[i]['controlled'] and previous_assignments[i]['assigned_to'] in self.clients:
-                        character['assigned_to'] = previous_assignments[i]['assigned_to']
-                        character['controlled'] = True
-                    else: character['assigned_to'] = self.clients[0]
-                if not any(character['controlled'] for character in self.characters):
-                    self.characters[0]['controlled'] = True
+                for i, char in enumerate(self.chars):
+                    if prev_assignments[i]['controlled'] and prev_assignments[i]['assigned_to'] in self.clients:
+                        char['assigned_to'] = prev_assignments[i]['assigned_to']
+                        char['controlled'] = True
+                    else: char['assigned_to'] = self.clients[0]
+                if not any(char['controlled'] for char in self.chars):
+                    self.chars[0]['controlled'] = True
             elif num_clients == 2:
-                for i, character in enumerate(self.characters):
-                    if previous_assignments[i]['controlled'] and previous_assignments[i]['assigned_to'] in self.clients:
-                        character['assigned_to'] = previous_assignments[i]['assigned_to']
-                        character['controlled'] = True
+                for i, char in enumerate(self.chars):
+                    if prev_assignments[i]['controlled'] and prev_assignments[i]['assigned_to'] in self.clients:
+                        char['assigned_to'] = prev_assignments[i]['assigned_to']
+                        char['controlled'] = True
                         next_controlled_index = (i + 2) % 4
                         next_index = (i + 1) % 4
-                        if previous_assignments[next_index]['assigned_to'] is None:
-                            self.characters[next_index]['assigned_to'] = previous_assignments[i]['assigned_to']
-                        elif previous_assignments[next_index]['assigned_to'] in self.clients:
-                            self.characters[next_index]['assigned_to'] = previous_assignments[next_index]['assigned_to']
-                previous_unique_clients = len(set(character['assigned_to'] for character in previous_assignments if character['assigned_to'] is not None))
-                for i, character in enumerate(self.characters):
-                    if character['assigned_to'] is None:
-                        if previous_unique_clients == 1:
-                            character['assigned_to'] = self.clients[1]
+                        if prev_assignments[next_index]['assigned_to'] is None:
+                            self.chars[next_index]['assigned_to'] = prev_assignments[i]['assigned_to']
+                        elif prev_assignments[next_index]['assigned_to'] in self.clients:
+                            self.chars[next_index]['assigned_to'] = prev_assignments[next_index]['assigned_to']
+                prev_unique_clients = len(set(char['assigned_to'] for char in prev_assignments if char['assigned_to'] is not None))
+                for i, char in enumerate(self.chars):
+                    if char['assigned_to'] is None:
+                        if prev_unique_clients == 1:
+                            char['assigned_to'] = self.clients[1]
                         else:
-                            if previous_assignments[i]['assigned_to'] in self.clients:
-                                character['assigned_to'] = previous_assignments[i]['assigned_to']
-                            else: character['assigned_to'] = self.clients[1]
-                if (previous_assignments[next_controlled_index]['assigned_to'] in self.clients and
-                    not self.characters[next_controlled_index]['assigned_to'] == self.clients[0]):
-                    self.characters[next_controlled_index]['controlled'] = True
+                            if prev_assignments[i]['assigned_to'] in self.clients:
+                                char['assigned_to'] = prev_assignments[i]['assigned_to']
+                            else: char['assigned_to'] = self.clients[1]
+                if (prev_assignments[next_controlled_index]['assigned_to'] in self.clients and
+                    not self.chars[next_controlled_index]['assigned_to'] == self.clients[0]):
+                    self.chars[next_controlled_index]['controlled'] = True
             elif num_clients == 3:
-                for i, character in enumerate(self.characters):
-                    if previous_assignments[i]['controlled'] and previous_assignments[i]['assigned_to'] in self.clients:
-                        character['assigned_to'] = previous_assignments[i]['assigned_to']
-                        character['controlled'] = True
-                    elif previous_assignments[i]['assigned_to'] == self.clients[0] or previous_assignments[i]['assigned_to'] not in self.clients:
-                        character['assigned_to'] = self.clients[0]
+                for i, char in enumerate(self.chars):
+                    if prev_assignments[i]['controlled'] and prev_assignments[i]['assigned_to'] in self.clients:
+                        char['assigned_to'] = prev_assignments[i]['assigned_to']
+                        char['controlled'] = True
+                    elif prev_assignments[i]['assigned_to'] == self.clients[0] or prev_assignments[i]['assigned_to'] not in self.clients:
+                        char['assigned_to'] = self.clients[0]
                     else:
-                        character['assigned_to'] = self.clients[2]
-                        character['controlled'] = True
+                        char['assigned_to'] = self.clients[2]
+                        char['controlled'] = True
             elif num_clients == 4:
-                for i, character in enumerate(self.characters):
-                    if previous_assignments[i]['controlled'] and previous_assignments[i]['assigned_to'] in self.clients:
-                        character['assigned_to'] = previous_assignments[i]['assigned_to']
-                        character['controlled'] = True
+                for i, char in enumerate(self.chars):
+                    if prev_assignments[i]['controlled'] and prev_assignments[i]['assigned_to'] in self.clients:
+                        char['assigned_to'] = prev_assignments[i]['assigned_to']
+                        char['controlled'] = True
                     else:
-                        character['assigned_to'] = self.clients[3]
-                        character['controlled'] = True
+                        char['assigned_to'] = self.clients[3]
+                        char['controlled'] = True
             self.send_chars_data()
 
     def handle(self, client):
@@ -130,9 +130,9 @@ class Server:
                     self.switch_character(client, 1)
                 elif isinstance(message, list):  # Check if the received message is a list
                     with self.lock:
-                        for i in range(len(self.characters)):
-                            if self.characters[i]['assigned_to'] == client:
-                                self.characters[i]['position'] = message[i]['position']
+                        for i in range(len(self.chars)):
+                            if self.chars[i]['assigned_to'] == client:
+                                self.chars[i]['position'] = message[i]['position']
                         self.send_chars_data()
             except:
                 try:

@@ -13,13 +13,18 @@ class Player():
         self.client.run()
 
     def update(self, dt, keys):
+        self.chars = self.client.chars
         direction_x = keys['RIGHT'] - keys['LEFT']
         direction_y = keys['DOWN'] - keys['UP']
-        vel = 300
+        self.vel = 300
         normalized_direction = pygame.math.Vector2(direction_x, direction_y)
-        if normalized_direction.length(): normalized_direction = normalized_direction.normalize()
-        self.pos = (self.pos[0] + normalized_direction.x * vel * dt, self.pos[1] + normalized_direction.y * vel * dt)
-        self.update_party(dt)
+        self.curr_char = next((i for i, character in enumerate(self.chars) if character['controlled'] and character['assigned_to'] is not None), 0)
+        if normalized_direction.length(): 
+            normalized_direction = normalized_direction.normalize()
+            self.new_pos = (self.chars[self.curr_char]['position'][0] + normalized_direction.x * self.vel * dt, self.chars[self.curr_char]['position'][1] + normalized_direction.y * self.vel * dt)
+            self.chars[self.curr_char]['position'] = self.new_pos
+            self.update_party(dt)
+        self.update_server()
         self.animate(dt, direction_x, direction_y)
 
     def update_party(self, dt):
@@ -37,7 +42,8 @@ class Player():
             self.client.send_data(chars_without_vector2)
 
     def render(self, surface):
-        surface.blit(self.curr_sprite, self.pos)
+        for char in self.chars:
+            surface.blit(self.curr_sprite, char['position'])
 
     def animate(self, dt, direction_x, direction_y):
         self.last_frame_update += dt
