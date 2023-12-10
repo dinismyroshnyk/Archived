@@ -1,8 +1,8 @@
 import socket, threading, pickle
 
 class Server:
-    def __init__(self, game_size_logic, host = '127.0.0.1', port = 5555, max_clients = 4):
-        self.game_size_logic = game_size_logic
+    def __init__(self, game_logic_size, host = '127.0.0.1', port = 5555, max_clients = 4):
+        self.game_logic_size = game_logic_size
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((host, port))
         self.server.listen()
@@ -13,7 +13,7 @@ class Server:
         self.chars = [{'assigned_to': None, 'controlled': False, 'position': (0, 0)} for _ in range(4)]
         self.running = True
         for i, char in enumerate(self.chars):
-            char['position'] = (self.game_size_logic[0] / 2, self.game_size_logic[1] / 2 + i * 60)  # Assign a default position to each character
+            char['position'] = (self.game_logic_size[0] / 2, self.game_logic_size[1] / 2 + i * 60)  # Assign a default position to each character
         print(f'Server started on {host}:{port}')
 
     def send_chars_data(self):
