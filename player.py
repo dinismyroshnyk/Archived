@@ -9,6 +9,7 @@ class Player():
         self.curr_frame, self.last_frame_update = 0, 0
         self.chars = [{'position': (self.pos[0], self.pos[1] + i * 60), 'assigned_to': None, 'controlled': False} for i in range(4)]
         self.curr_char = 0
+        self.is_host = False
         self.client = Client()
         self.client.run()
 
@@ -24,7 +25,8 @@ class Player():
             self.new_pos = (self.chars[self.curr_char]['position'][0] + normalized_direction.x * self.vel * dt, self.chars[self.curr_char]['position'][1] + normalized_direction.y * self.vel * dt)
             self.chars[self.curr_char]['position'] = self.new_pos
             self.update_party(dt)
-        self.update_server()
+        if self.client.connected:
+            self.update_server()
         self.animate(dt, direction_x, direction_y)
 
     def update_party(self, dt):

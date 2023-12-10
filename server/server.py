@@ -1,11 +1,12 @@
 import socket, threading, pickle
 
 class Server:
-    def __init__(self, host = '127.0.0.1', port = 5555):
+    def __init__(self, host = '127.0.0.1', port = 5555, max_clients = 4):
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((host, port))
         self.server.listen()
         self.clients = []
+        self.max_clients = max_clients
         self.client_identifiers = {} # For debugging purposes
         self.lock = threading.Lock()
         self.chars = [{'assigned_to': None, 'controlled': False, 'position': (0, 0)} for _ in range(4)]
@@ -140,7 +141,8 @@ class Server:
                         print(f'Client {client.getpeername()} has disconnected.')
                 except OSError:
                     print('The client is already disconnected.')
-                self.clients.remove(client)
+                if client in self.clients:
+                    self.clients.remove(client)
                 self.assign_characters()
                 self.debug() # Debug line
                 self.send_chars_data()
@@ -151,7 +153,7 @@ class Server:
         while self.running:
             try:
                 client, address = self.server.accept()
-                if len(self.clients) < 4:
+                if len(self.clients) < self.max_clients:
                     print(f'Client {address} has connected.')
                     self.clients.append(client)
                     self.assign_client_id(client)  # Debug line

@@ -12,6 +12,7 @@ class Game():
         self.screen = pygame.display.set_mode(self.SCREEN_SIZE, pygame.FULLSCREEN | pygame.SCALED | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.OPENGL)
         self.shader = Shader(self)
         self.player = None
+        self.server = None
         self.running, self.playing = True, True
         self.keys = {'UP': False, 'DOWN': False, 'LEFT': False, 'RIGHT': False, 'SELECT': False, 'ARROW_UP': False, 'ARROW_DOWN': False, 'PAUSE': False}
         self.colors = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'GRAY': (128, 128, 128)}
@@ -38,7 +39,7 @@ class Game():
 
     def handle_quit_event(self):
         self.running, self.playing = False, False
-        self.player.client.disconnect()
+        self.exit_server()
 
     def handle_key_event(self, event, is_key_down):
         key_map = {
@@ -87,6 +88,13 @@ class Game():
     def reset_keys(self):
         for key in self.keys:
             self.keys[key] = False
+
+    def exit_server(self):
+        if self.server is not None:
+            if self.player.is_host:
+                self.server.stop()
+                self.player.is_host = False
+        else: self.player.client.disconnect()
 
 if __name__ == '__main__':
     game = Game()

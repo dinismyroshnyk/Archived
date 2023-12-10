@@ -1,3 +1,5 @@
+import threading
+from server.server import Server, run_server
 from states.state import State
 from states.game_world import GameWorld
 from states.credits_screen import CreditsScreen
@@ -19,7 +21,11 @@ class TitleScreen(State):
 
     def handle_selected_option(self, option):
         if option == 'Single Player':
+            self.game.server = Server(max_clients=1)
+            server_thread = threading.Thread(target=run_server, args=(self.game.server,))
+            server_thread.start()
             new_state = GameWorld(self.game)
+            self.game.player.is_host = True
             new_state.enter_state()
         if option == 'Multiplayer':
             new_state = MultiplayerScreen(self.game)

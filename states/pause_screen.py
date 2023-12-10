@@ -17,12 +17,12 @@ class PauseScreen(State):
         if option == 'Resume':
             self.exit_state()
         if option == 'Main Menu':
+            self.game.exit_server()
             self.exit_state()
             self.exit_state()
-            self.game.player.client.disconnect()
         if option == 'Quit':
             self.game.running, self.game.playing = False, False
-            self.game.player.client.disconnect()
+            self.game.exit_server()
 
     def render(self, surface):
         surface.fill(self.game.colors['BLACK'])

@@ -18,7 +18,6 @@ class OptionsScreen(State):
         if option == 'Resolution':
             new_state = ResolutionOptions(self.game)
             new_state.enter_state()
-            print('Resolution')
         if option == 'Controls':
             print('Controls')
         if option == 'Back':

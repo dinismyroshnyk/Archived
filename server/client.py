@@ -18,7 +18,7 @@ class Client:
                 data = self.client.recv(1024)
                 if data:  # Check if the data is not empty
                     message = pickle.loads(data)
-                    print(f"Received data: {message}")  # Add this line
+                    #print(f"Received data: {message}")
                     if message == 'server disconnect':
                         print('The server has closed.')
                         self.disconnect()
@@ -42,6 +42,7 @@ class Client:
         if self.connected:
             self.connected = False
             try:
+                print('Disconnecting from server...')
                 self.send_data('disconnect')
             except ConnectionResetError:
                 pass
