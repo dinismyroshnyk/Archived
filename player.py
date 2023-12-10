@@ -23,8 +23,9 @@ class Player():
         if normalized_direction.length(): 
             normalized_direction = normalized_direction.normalize()
             self.new_pos = (self.chars[self.curr_char]['position'][0] + normalized_direction.x * self.vel * dt, self.chars[self.curr_char]['position'][1] + normalized_direction.y * self.vel * dt)
-            self.chars[self.curr_char]['position'] = self.new_pos
-            self.update_party(dt)
+            if 0 <= self.new_pos[0] <= self.game.GAME_LOGIC_SIZE[0] - self.scaled_width and 0 <= self.new_pos[1] <= self.game.GAME_LOGIC_SIZE[1] - self.scaled_height:
+                self.chars[self.curr_char]['position'] = self.new_pos
+                self.update_party(dt)
         if self.client.connected:
             self.update_server()
         self.animate(dt, direction_x, direction_y)
@@ -44,8 +45,11 @@ class Player():
             self.client.send_data(chars_without_vector2)
 
     def render(self, surface):
-        for char in self.chars:
-            surface.blit(self.curr_sprite, char['position'])
+        for i, char in enumerate(self.chars):
+            sprite = self.curr_sprite.copy()
+            shade_color = ((i + 1) * 50, (i + 1) * 50, (i + 1) * 50, 255)
+            sprite.fill(shade_color, special_flags=pygame.BLEND_RGBA_MULT)
+            surface.blit(sprite, char['position'])
 
     def animate(self, dt, direction_x, direction_y):
         self.last_frame_update += dt

@@ -13,7 +13,7 @@ class Server:
         self.chars = [{'assigned_to': None, 'controlled': False, 'position': (0, 0)} for _ in range(4)]
         self.running = True
         for i, char in enumerate(self.chars):
-            char['position'] = (self.game_logic_size[0] / 2, self.game_logic_size[1] / 2 + i * 60)  # Assign a default position to each character
+            char['position'] = (self.game_logic_size[0] / 2, self.game_logic_size[1] / 2 + i * 60)
         print(f'Server started on {host}:{port}')
 
     def send_chars_data(self):
