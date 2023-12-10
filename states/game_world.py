@@ -1,6 +1,7 @@
-import pygame, os, pytmx
+import pygame, os, pytmx, random
 from states.state import State
 from player import Player
+from enemy import Enemy
 from states.pause_screen import PauseScreen
 
 class GameWorld(State):
@@ -11,9 +12,12 @@ class GameWorld(State):
         self.game.player = self.player
         self.arrow_up_pressed = False
         self.arrow_down_pressed = False
+        self.enemies = [Enemy(self.game, (random.randint(0, self.game.GAME_LOGIC_SIZE[0]), random.randint(0, self.game.GAME_LOGIC_SIZE[1])), 100) for _ in range(7)]
+
 
     def update(self, dt, keys):
         self.player.update(dt, keys)
+        for enemy in self.enemies: enemy.update(dt)
         if keys['PAUSE']:
             new_state = PauseScreen(self.game)
             new_state.enter_state()
@@ -32,6 +36,7 @@ class GameWorld(State):
         surface.fill((0, 0, 0))
         self.draw_map(surface, 720, 3800, 2.5 * self.tmxdata.tilewidth, 2.5 * self.tmxdata.tileheight)
         self.player.render(surface)
+        for enemy in self.enemies: enemy.render(surface)
 
     def draw_map(self, surface, offset_x, offset_y, scale_x, scale_y):
         tmxdata = self.tmxdata
