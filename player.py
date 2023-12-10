@@ -79,15 +79,15 @@ class Player():
         else: return 'down'
 
     def load_sprites(self):
-        self.spritesheet = pygame.image.load(os.path.join(self.game.sprites_dir, 'entities', 'player', 'Knight1_Move.png')).convert_alpha()
-        self.frame_width = 52  # width of each frame in pixels
-        self.frame_height = 52  # height of each frame in pixels
-        self.scaled_width = 128  # new width after scaling
-        self.scaled_height = 128  # new height after scaling
+        self.spritesheet = pygame.image.load(os.path.join(self.game.sprites_dir, 'entities', 'player', 'knight', 'Knight_Move.png')).convert_alpha()
+        self.frame_width = 52
+        self.frame_height = 52
+        self.scaled_width = 128
+        self.scaled_height = 128
         self.directions = ['down', 'down_right', 'right', 'up_right', 'up', 'up_left', 'left', 'down_left']
         self.sprites = {direction: [] for direction in self.directions}
         for i, direction in enumerate(self.directions):
-            for j in range(4):  # 4 sprites per direction
+            for j in range(4):
                 frame = self.spritesheet.subsurface(pygame.Rect(j * self.frame_width, i * self.frame_height, self.frame_width, self.frame_height))
                 scaled_frame = pygame.transform.scale(frame, (self.scaled_width, self.scaled_height))
                 self.sprites[direction].append(scaled_frame)
