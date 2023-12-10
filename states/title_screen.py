@@ -21,7 +21,7 @@ class TitleScreen(State):
 
     def handle_selected_option(self, option):
         if option == 'Single Player':
-            self.game.server = Server(max_clients=1)
+            self.game.server = Server(self.game.GAME_SIZE_LOGIC, max_clients=1)
             server_thread = threading.Thread(target=run_server, args=(self.game.server,))
             server_thread.start()
             new_state = GameWorld(self.game)
