@@ -11,7 +11,7 @@ The vast majority of these projects are small, simple, and were created as assig
 Below is a list of projects archived in this repository.
 You can find a brief description of each project in the notes section.
 
-### 🌐 [fpcolumbofilia](https://github.com/dinismyroshnyk/Archived/fpcolumbofilia)
+### 🌐 [fpcolumbofilia](https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia)
 
 ## 📝 Notes
 
