@@ -1,3 +1,7 @@
+:img-c: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/c/c-original.svg[alt="C Logo",width=25]
+:img-html5: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/html5/html5-original.svg[alt="HTML 5 Logo",width=25]
+:img-cpp: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/cplusplus/cplusplus-original.svg[alt="C++ Logo",width=25]
+
 = 📦 Archived
 
 Welcome to the *Archived* repository.
@@ -11,14 +15,13 @@ The vast majority of these projects are small, simple, and were created as assig
 Below is a list of projects archived in this repository.
 You can find a brief description of each project in the notes section.
 
-[cols="2,1",options="header",]
 |===
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/c/c-original.svg[alt="C Logo",width=25]
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia[fpcolumbofilia] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/html5/html5-original.svg[alt="HTML 5 Logo",width=25]
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/cplusplus/cplusplus-original.svg[alt="C++ Logo",width=25]
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/cplusplus/cplusplus-original.svg[alt="C++ Logo",width=25]
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/c/c-original.svg[alt="C Logo",width=25]
-| link:https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal[TrabalhoFinal] | image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/c/c-original.svg[alt="C Logo",width=25]
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] | {img-c}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia[fpcolumbofilia] | {img-html5}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] | {img-cpp}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] | {img-cpp}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] | {img-c}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal[TrabalhoFinal] | {img-c}
 |===
 
 == 📝 Notes
