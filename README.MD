@@ -20,6 +20,6 @@ You can find a brief description of each project in the notes section.
 
 ## 📝 Notes
 
-- **CodeInsights** is a collection of small exercises in C. The exercises were made as a class assignment for an itrodutory programming course. The focus was on understanding the basics of the C programming language.
-- **fpcolumbofilia** is a simple website using vanilla HTML, CSS, and JavaScript, made as a class assignment. The focus was on remaking the following [website](http://www.fpcolumbofilia.pt/) with a more modern design.
-- **TrabalhoFinal** is the final project for the same introductory programming course as the **CodeInsights** project. The project is a simple program that helps users to manage tasks.
+- [CodeInsights](https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights) is a collection of small exercises in C. The exercises were made as a class assignment for an itrodutory programming course. The focus was on understanding the basics of the C programming language.
+- [fpcolumbofilia](https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia) is a simple website using vanilla HTML, CSS, and JavaScript, made as a class assignment. The focus was on remaking the following [website](http://www.fpcolumbofilia.pt/) with a more modern design.
+- [TrabalhoFinal](https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal) is the final project for the same introductory programming course as the [CodeInsights](https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights) project. The project is a simple program that helps users to manage tasks.
