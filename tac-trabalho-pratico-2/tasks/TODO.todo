@@ -1,0 +1,34 @@
+Materiais:
+
+    - 2 arduinos (Arduino UNO)
+    - 1 sensor de temperatura (LM35)
+    - 1 led vermelho
+    - 1 led verde
+    - 1 led amarelo
+    - 1 botão
+    - 1 servo motor (SG90)
+    - breadboard
+
+Extras:
+    
+    - PySerial (https://create.arduino.cc/projecthub/ansh2919/serial-communication-between-python-and-arduino-e7cce0) [PYTHON API]
+
+Processo:
+
+    Arduino 1:
+
+        - recolhe os dados do sensor de temperatura (15 em 15 segundos)
+        - escreve os dados no Serial Monitor (máximo, mínimo e média, a cada 60 segundos)
+
+    Arduino 2:
+
+        - se a temperatura for maior que 25ºC, acende o led vermelho
+
+            - os dados de temperatura e o momento em que o led vermelho acende são disponibilizados na plataforma ThingSpeak
+            - o servo motor executa um movimento de 0 a 180 graus, de forma proportional ao valor da temperatura (20 a 25ºC)
+            - o led vermelho só pode ser apagado com o botão switch
+
+        - se a temperatura estiver entre 20ºC e 25ºC, acende o led verde
+        - se a temperatura for menor que 20ºC, acende o led amarelo
+
+    - os 2 arduinos têm de se comunicar entre si (um recolhe os dados e o outro responde com base nos dados recolhidos)
