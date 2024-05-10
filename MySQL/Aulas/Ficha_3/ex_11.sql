@@ -1,0 +1,6 @@
+SELECT
+    MIN(sal) AS 'SALÁRIO_MAIS_BAIXO',
+    MAX(sal) AS 'SALÁRIO_MAIS_ALTO',
+    AVG(sal) AS 'SALÁRIO_MÉDIO'
+FROM emp
+;
