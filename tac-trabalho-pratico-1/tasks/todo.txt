@@ -1,0 +1,38 @@
+Semáforo:
+
+[x]Colocar tudo pra funcionar em simultâneo !!
+
+
+3 LED's (semáforo carro)
+
+    [x] Default ligado a verde;
+
+    [x] 2 segundos a mudar de cor;
+
+    [x] intermitente quando sinal peões verde;
+
+
+2 LED's (semáforo peões)
+
+    [x] Deve ser pressionado um botão para ativar;
+
+    [x] Ativa apenas quando o vermelho dos carros ficar durante 2 segundos, e ficará verde durante 10 segundos;
+
+    [x] 10 segundos num display de 9 até 0
+
+    [x] Dps dos 10 segundos o sinal fica intermitente durante 6 segundos e, simultâneamente, deverá ser emitido um sinal sonoro (Buzzer);
+ 
+
+1 LED (intermitente)
+    [x] Qnd luminosidade reduzida
+
+
+Materiais:
+
+    6 LED's
+    1 display
+    1 botão
+    1 fotosensor
+    1 buzzer
+    1 descodificador
+
