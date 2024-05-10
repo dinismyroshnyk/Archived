@@ -11,9 +11,12 @@ The vast majority of these projects are small, simple, and were created as assig
 Below is a list of projects archived in this repository.
 You can find a brief description of each project in the notes section.
 
-### 🇨 [CodeInsights](https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights)
-### 🌐 [fpcolumbofilia](https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia)
-### 🇨 [TrabalhoFinal](https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal)
+|                                                                                       |   |
+|---------------------------------------------------------------------------------------|---|
+| [CodeInsights](https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights)     | 🇨 |
+| [fpcolumbofilia](https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia) | 🌐 |
+| [TrabalhoFinal](https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal)   | 🇨 |
+
 
 ## 📝 Notes
 
