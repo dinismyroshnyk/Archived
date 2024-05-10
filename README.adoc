@@ -1,23 +1,26 @@
 :img-c: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/c/c-original.svg[alt="C Logo",width=25]
 :img-html5: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/html5/html5-original.svg[alt="HTML 5 Logo",width=25]
 :img-cpp: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/cplusplus/cplusplus-original.svg[alt="C++ Logo",width=25]
+:img-java: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/java/java-original.svg[alt="Java Logo",width=25]
+:img-mysql: image:https://raw.githubusercontent.com/devicons/devicon/v2.16.0/icons/mysql/mysql-original.svg[alt="MySQL Logo",width=25]
 
 = 📦 Archived
 
-Welcome to the *Archived* repository.
-
-This space is dedicated to preserving my older projects that are no longer actively maintained or developed.
-
+Welcome to the *Archived* repository. +
+This space is dedicated to preserving my older projects that are no longer actively maintained or developed. +
 The vast majority of these projects are small, simple, and were created as assignments for my university course.
 
 == 📂 Contents
 
-Below is a list of projects archived in this repository.
+Below is a list of projects archived in this repository. +
 You can find a brief description of each project in the notes section.
 
 |===
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/C_Estruturas[C_Estruturas] | {img-c}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] | {img-c}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia[fpcolumbofilia] | {img-html5}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/Java[Java] | {img-java}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/MySQL[MySQL] | {img-mysql}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] | {img-cpp}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] | {img-cpp}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] | {img-c}
@@ -26,9 +29,12 @@ You can find a brief description of each project in the notes section.
 
 == 📝 Notes
 
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/C_Estruturas[C_Estruturas] is a collection of small exercises in C. The exercises were made as a class assignment for a data structures course. The focus was on understanding the basics of data structures and their implementation in C.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] is a collection of small exercises in C. The exercises were made as a class assignment for an introductory programming course. The focus was on understanding the basics of the C programming language.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/fpcolumbofilia[fpcolumbofilia] is a simple website using vanilla HTML, CSS, and JavaScript, made as a class assignment. The focus was on remaking the following link:https://www.fpcolumbofilia.pt/[website] with a more modern design.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/Java[Java] is a collection of exercises in Java. The exercises were made as a class assignment and an introduction to OOP concepts.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/MySQL[MySQL] is a collection of exercises in MySQL. The exercises were made as a class assignment and an introduction to SQL and database management.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] is a simple traffic light simulation for arduino made as a class assignment. The program was developed using the help of the PlatformIO IDE extension for Visual Studio Code.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] was supposed to be a program that monitored the temperature in a room and controlled some leds and a servo motor based on the temperature. The tasks should be performed by 2 separate arduinos via serial communication and their data should be displayed on a website. This project was never completed.
-- link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] is a simple program that simulates a bank system. The program was made as a class assignment for a data structures course. The focus was on understanding the basics of data structures and their implementation in C.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] is the final project for the same data structures course as the link:https://github.com/dinismyroshnyk/Archived/tree/main/C_Estruturas[C_Estruturas] project. The project is a simple program that simulates a banking system.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal[TrabalhoFinal] is the final project for the same introductory programming course as the link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] project. The project is a simple program that helps users to manage tasks.
