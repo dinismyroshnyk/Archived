@@ -23,6 +23,9 @@ You can find a brief description of each project in the notes section.
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/MySQL[MySQL] | {img-mysql}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] | {img-cpp}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] | {img-cpp}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/TP2v2[TP2v2] | {img-cpp}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/Trabalho_Estruturas_1[Trabalho_Estruturas_1] | {img-c}
+| link:https://github.com/dinismyroshnyk/Archived/tree/main/Trabalho_Estruturas_2[Trabalho_Estruturas_2] | {img-c}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] | {img-c}
 | link:https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal[TrabalhoFinal] | {img-c}
 |===
@@ -36,5 +39,8 @@ You can find a brief description of each project in the notes section.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/MySQL[MySQL] is a collection of exercises in MySQL. The exercises were made as a class assignment and an introduction to SQL and database management.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-1[tac-trabalho-pratico-1] is a simple traffic light simulation for arduino made as a class assignment. The program was developed using the help of the PlatformIO IDE extension for Visual Studio Code.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/tac-trabalho-pratico-2[tac-trabalho-pratico-2] was supposed to be a program that monitored the temperature in a room and controlled some leds and a servo motor based on the temperature. The tasks should be performed by 2 separate arduinos via serial communication and their data should be displayed on a website. This project was never completed.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/TP2v2[TP2v2] is a simple arduino program that monitors the temperature in a room and controls leds, a 7-segment display and a piezo buzzer based on the temperature. The focus was to understand state machines and how to implement them in an arduino program.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/Trabalho_Estruturas_1[Trabalho_Estruturas_1] is the first project for the data structures course from a different year. The project is a simple program that stores and manages clients' purchases from multiple fictional stores.
+- link:https://github.com/dinismyroshnyk/Archived/tree/main/Trabalho_Estruturas_2[Trabalho_Estruturas_2] is the final project for the data structures course from the same year as link:https://github.com/dinismyroshnyk/Archived/tree/main/Trabalho_Estruturas_1[Trabalho_Estruturas_1]. This project is the continuation of the previous project and adds more features to the program.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/trabalho-ed[trabalho-ed] is the final project for the same data structures course as the link:https://github.com/dinismyroshnyk/Archived/tree/main/C_Estruturas[C_Estruturas] project. The project is a simple program that simulates a banking system.
 - link:https://github.com/dinismyroshnyk/Archived/tree/main/TrabalhoFinal[TrabalhoFinal] is the final project for the same introductory programming course as the link:https://github.com/dinismyroshnyk/Archived/tree/main/CodeInsights[CodeInsights] project. The project is a simple program that helps users to manage tasks.
