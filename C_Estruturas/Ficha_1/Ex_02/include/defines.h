@@ -1,0 +1,3 @@
+#define MAX_ARRAY_SIZE 30
+#define MAX_RANDOM_NUMBER 50
+#define MIN_RANDOM_NUMBER 1
